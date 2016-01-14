@@ -12,8 +12,7 @@
         android:text="Test Button"
         android:id="@+id/testButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="73dp" />
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -22,5 +21,26 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/intervalSpinner"
+        android:layout_toEndOf="@+id/intervalText"
+        android:layout_alignLeft="@+id/testButton"
+        android:layout_alignStart="@+id/testButton"
+        android:layout_alignTop="@+id/intervalText"
+        android:layout_alignBottom="@+id/testView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Interval:"
+        android:id="@+id/intervalText"
+        android:layout_alignBottom="@+id/testView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="24dp" />
 
 </RelativeLayout>

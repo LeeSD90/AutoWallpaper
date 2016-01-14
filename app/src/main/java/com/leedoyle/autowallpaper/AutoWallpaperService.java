@@ -14,12 +14,11 @@ public class AutoWallpaperService extends Service {
     private static final String TAG = "AutoWallpaperService";
     private PageRetriever pageRetriever;
     private PageParser pageParser;
-    private WallpaperManager wallManager;
+    private int interval = 10000;
 
     public AutoWallpaperService(){
         pageRetriever = new PageRetriever();
         pageParser = new PageParser();
-        //wallManager = WallpaperManager.getInstance(this);
     }
 
     private void setNewWallpaper() {
@@ -45,6 +44,7 @@ public class AutoWallpaperService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startID){
         Log.d(TAG, "Service Started.");
+
         final Handler h = new Handler(){
             @Override
             public void handleMessage(Message m){   //Handle recieved messages
@@ -59,7 +59,7 @@ public class AutoWallpaperService extends Service {
                 while(true)
                 {
                     try{
-                        Thread.sleep(Math.round(10000));     // Wait (10min = 600000)
+                        Thread.sleep(interval);     // Wait (10min = 600000)
                         h.sendEmptyMessage(0);  //Send message to Handler
                     }
                     catch(Exception e){
@@ -68,6 +68,11 @@ public class AutoWallpaperService extends Service {
                 }
             }
         }).start();
+
+        if(intent.getExtras() != null){
+            interval = Integer.parseInt(intent.getStringExtra("interval"));
+        }
+
         return super.onStartCommand(intent, flags, startID);
     }
 
