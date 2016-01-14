@@ -14,6 +14,7 @@ public class AutoWallpaperService extends Service {
     private static final String TAG = "AutoWallpaperService";
     private PageRetriever pageRetriever;
     private PageParser pageParser;
+    private boolean running;
     private int interval = 10000;
 
     public AutoWallpaperService(){
@@ -44,6 +45,13 @@ public class AutoWallpaperService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startID){
         Log.d(TAG, "Service Started.");
+        running = true;
+
+        if(intent.getExtras() != null){
+            interval = Integer.parseInt(intent.getStringExtra("interval"));
+        }
+
+        Log.d(TAG, Integer.toString(interval));
 
         final Handler h = new Handler(){
             @Override
@@ -56,7 +64,7 @@ public class AutoWallpaperService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true)
+                while(running)
                 {
                     try{
                         Thread.sleep(interval);     // Wait (10min = 600000)
@@ -69,16 +77,13 @@ public class AutoWallpaperService extends Service {
             }
         }).start();
 
-        if(intent.getExtras() != null){
-            interval = Integer.parseInt(intent.getStringExtra("interval"));
-        }
-
         return super.onStartCommand(intent, flags, startID);
     }
 
     @Override
     public void onDestroy(){
-
+        running = false;
+        super.onDestroy();
     }
 
     @Override
