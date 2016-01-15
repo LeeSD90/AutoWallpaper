@@ -9,8 +9,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test Button"
-        android:id="@+id/testButton"
+        android:text="Apply"
+        android:id="@+id/applyButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -26,11 +26,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/intervalSpinner"
+        android:paddingLeft="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/intervalText"
         android:layout_toEndOf="@+id/intervalText"
-        android:layout_alignLeft="@+id/testButton"
-        android:layout_alignStart="@+id/testButton"
-        android:layout_alignTop="@+id/intervalText"
-        android:layout_alignBottom="@+id/testView" />
+        android:layout_alignBottom="@+id/intervalText"
+        android:layout_alignTop="@+id/intervalText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,9 +40,19 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Interval:"
         android:id="@+id/intervalText"
-        android:layout_alignBottom="@+id/testView"
+        android:textSize="20sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="24dp" />
+        android:layout_below="@+id/testView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Settings"
+        android:id="@+id/settingsText"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/applyButton"
+        android:layout_alignEnd="@+id/applyButton" />
 
 </RelativeLayout>

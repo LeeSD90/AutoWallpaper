@@ -14,7 +14,7 @@ import android.widget.Spinner;
 public class MainMenu extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private Spinner intervalSpinner;
-    private Button testButton;
+    private Button applyButton;
     private int selectedInterval;
 
     @Override
@@ -22,10 +22,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        testButton = (Button) findViewById(R.id.testButton);
+        applyButton = (Button) findViewById(R.id.applyButton);
         intervalSpinner = (Spinner) findViewById(R.id.intervalSpinner);
 
-        testButton.setOnClickListener(this);
+        applyButton.setOnClickListener(this);
         intervalSpinner.setOnItemSelectedListener(this);
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.interval_array, android.R.layout.simple_spinner_item);
@@ -50,12 +50,17 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.testButton:
-                startService(v);
-                //Bitmap bitmap = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
-                //((ImageView) findViewById(R.id.testView)).setImageBitmap(bitmap);
+            case R.id.applyButton:
+                applyChanges(v);
                 break;
         }
+    }
+
+    private void applyChanges(View v){
+        stopService(v);
+        Intent i = new Intent(getBaseContext(), AutoWallpaperService.class);
+        i.putExtra("interval", Integer.toString(selectedInterval));
+        startService(i);
     }
 
     @Override
@@ -99,9 +104,6 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener,
                         selectedInterval = 86400000;
                         break;
                 }
-                Intent i = new Intent(getBaseContext(), AutoWallpaperService.class);
-                i.putExtra("interval", Integer.toString(selectedInterval));
-                startService(i);
                 break;
         }
     }
