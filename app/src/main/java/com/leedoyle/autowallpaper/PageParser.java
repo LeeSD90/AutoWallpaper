@@ -38,7 +38,7 @@ public class PageParser {
                     upperLimit = Integer.parseInt(firstImage.attr("data-id")); //Set upper limit for RNG to the id of the latest image
                     Elements links = doc.getElementsByTag("li");
                     Random r = new Random();
-                    int seed = r.nextInt((upperLimit + 1)- 1) + 1;          // Generate random number for wallpaper to pick
+                    int seed = r.nextInt((upperLimit + 1)- 1) + 1;          //Generate random number for wallpaper to pick
                     for(Element link : links) {
                         if (link.attr("data-id").equals(Integer.toString(seed))) {
                             Elements imageLinks = link.getElementsByTag("img");
@@ -67,7 +67,7 @@ public class PageParser {
         return image;
     }
 
-    private Bitmap DownloadToBitmap(String url){
+    private Bitmap DownloadToBitmap(String url){       //Gets a bitmap from an image url
         Bitmap image = null;
         try {
             URL newUrl = new URL(url);

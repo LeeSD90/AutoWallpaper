@@ -51,7 +51,7 @@ public class AutoWallpaperService extends Service {
             interval = Integer.parseInt(intent.getStringExtra("interval"));
         }
 
-        Log.d(TAG, Integer.toString(interval));
+        Log.d(TAG, "Interval: " + Integer.toString(interval));
 
         final Handler h = new Handler(){
             @Override
@@ -68,7 +68,7 @@ public class AutoWallpaperService extends Service {
                 {
                     try{
                         Thread.sleep(interval);     // Wait (10min = 600000)
-                        h.sendEmptyMessage(0);  //Send message to Handler
+                        h.sendEmptyMessage(0);      //Send message to Handler
                     }
                     catch(Exception e){
                         e.printStackTrace();

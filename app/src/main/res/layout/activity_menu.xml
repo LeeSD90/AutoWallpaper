@@ -27,12 +27,43 @@
         android:layout_height="wrap_content"
         android:id="@+id/intervalSpinner"
         android:paddingLeft="5dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_toRightOf="@+id/intervalText"
-        android:layout_toEndOf="@+id/intervalText"
         android:layout_alignBottom="@+id/intervalText"
-        android:layout_alignTop="@+id/intervalText" />
+        android:layout_alignTop="@+id/intervalText"
+        android:layout_alignRight="@+id/settingsText"
+        android:layout_alignEnd="@+id/settingsText" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:background="#b9b9b9"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/view"
+        android:layout_below="@+id/intervalSpinner"
+        android:layout_toLeftOf="@+id/testView"
+        android:layout_toStartOf="@+id/testView" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:background="#b9b9b9"
+        android:id="@+id/view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/settingsText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:background="#b9b9b9"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/sourceText"
+        android:layout_toLeftOf="@+id/testView"
+        android:layout_toStartOf="@+id/testView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,10 +71,12 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Interval:"
         android:id="@+id/intervalText"
-        android:textSize="20sp"
+        android:textSize="19sp"
+        android:layout_below="@+id/testView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/testView" />
+        android:layout_marginTop="43dp"
+        style="@style/Base.TextAppearance.AppCompat.Menu" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,8 +84,24 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Settings"
         android:id="@+id/settingsText"
+        style="@style/Base.TextAppearance.AppCompat.Title"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/applyButton"
-        android:layout_alignEnd="@+id/applyButton" />
+        android:layout_alignEnd="@+id/applyButton"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Source:"
+        android:id="@+id/sourceText"
+        android:textSize="19sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/intervalSpinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        style="@style/Base.TextAppearance.AppCompat.Menu" />
 
 </RelativeLayout>
