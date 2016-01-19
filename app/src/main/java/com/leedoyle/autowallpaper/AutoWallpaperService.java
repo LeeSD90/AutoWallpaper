@@ -11,7 +11,6 @@ public class AutoWallpaperService extends IntentService {
 
     private static final String TAG = "AutoWallpaperService";
     private PageParser pageParser;
-    private int interval = 10000;
 
     public AutoWallpaperService(){
         super("AutoWallpaperService");
@@ -21,12 +20,6 @@ public class AutoWallpaperService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent){
         Log.d(TAG, "Service running");
-
-        if(intent.getExtras() != null){
-            interval = Integer.parseInt(intent.getStringExtra("interval"));
-        }
-
-        Log.d(TAG, "Interval: " + Integer.toString(interval));
         Log.d(TAG, "Getting new wallpaper");
         getRandomWallpaper();
     }

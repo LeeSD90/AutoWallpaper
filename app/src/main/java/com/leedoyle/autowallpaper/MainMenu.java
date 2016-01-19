@@ -36,14 +36,6 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener,
         intervalSpinner.setAdapter(adapter1);
     }
 
-    public void startService(View view){
-        startService(new Intent(getBaseContext(), AutoWallpaperService.class));
-    }
-
-    public void stopService(View view){
-        stopService(new Intent(getBaseContext(), AutoWallpaperService.class));
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_menu, menu);
@@ -90,8 +82,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener,
         switch(parent.getId()){
             case R.id.intervalSpinner:
                 switch(parent.getItemAtPosition(position).toString()){
-                    case "10 seconds (Test!!!)":
-                        selectedInterval = 10000;
+                    case "1 minute":
+                        selectedInterval = 60000;
                         break;
                     case "10 minutes":
                         selectedInterval = 600000;
