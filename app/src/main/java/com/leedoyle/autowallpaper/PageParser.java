@@ -43,7 +43,6 @@ public class PageParser {
                         if (link.attr("data-id").equals(Integer.toString(seed))) {
                             Elements imageLinks = link.getElementsByTag("img");
                             for(Element imageLink : imageLinks){
-                                Log.d(TAG, Integer.toString(seed));
                                 Log.d(TAG, imageLink.toString());
                                 imageHLink = imageLink.attr("data-original");
                                 image = DownloadToBitmap(imageHLink);
@@ -64,7 +63,6 @@ public class PageParser {
         }
         catch(Exception e){
             e.printStackTrace();
-            Log.d(TAG, "test");
         }
         return image;
     }
