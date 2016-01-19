@@ -1,5 +1,8 @@
 package com.leedoyle.autowallpaper;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,10 +60,15 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener,
     }
 
     private void applyChanges(View v){
-        stopService(v);
-        Intent i = new Intent(getBaseContext(), AutoWallpaperService.class);
-        i.putExtra("interval", Integer.toString(selectedInterval));
-        startService(i);
+        setAlarm();
+    }
+
+    private void setAlarm(){
+        Intent i = new Intent(getApplicationContext(), WallpaperAlarmReceiver.class);
+        final PendingIntent pI = PendingIntent.getBroadcast(this, WallpaperAlarmReceiver.REQUEST_CODE, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        long initialTime = System.currentTimeMillis();
+        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTime, selectedInterval, pI);
     }
 
     @Override

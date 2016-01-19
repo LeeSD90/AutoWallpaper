@@ -18,11 +18,17 @@
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name=".WallpaperAlarmReceiver"
+            android:process=":remote" >
+        </receiver>
+
         <service
             android:name=".AutoWallpaperService"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="false" >
         </service>
+
     </application>
 
 </manifest>
