@@ -3,8 +3,7 @@ package com.leedoyle.autowallpaper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
-/*TODO Add reciever for boot completed - Set alarm timers here instead of in the UI class
+/*
   TODO Add some kind of settings save for the UI elements when the phone is turned off. Can then pull settings from there when booting the phone
 */
 
