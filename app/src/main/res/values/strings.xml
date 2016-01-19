@@ -6,7 +6,29 @@
     <string name="settings_category">General Settings</string>
     <string name="interval_setting">Timer Interval</string>
     <string name="interval_setting_default">60000</string>
+    <string name="source_setting">Source website</string>
+    <string name="source_setting_default">http://androidwallpape.rs/</string>
     <string name="apply_button">Apply</string>
+    <string name="wifi_only_setting">Download over WiFi only</string>
+
+    <string-array name="source_array">
+        <item>http://androidwallpape.rs/</item>
+        <item>10 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Daily</item>
+    </string-array>
+    <string-array name="source_array_values">
+        <item>http://androidwallpape.rs/</item>
+        <item>600000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>10800000</item>
+        <item>21600000</item>
+        <item>86400000</item>
+    </string-array>
 
     <string-array name="interval_array">
         <item>1 minute</item>

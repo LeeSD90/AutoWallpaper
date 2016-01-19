@@ -78,7 +78,6 @@ public class PageParser {
             Log.d(TAG, "Unable to obtain bitmap, no internet?");
             return null;
         }
-
         return image;
     }
 }

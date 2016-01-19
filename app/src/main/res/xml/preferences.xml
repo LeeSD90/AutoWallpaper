@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:title="@string/settings_category"
-        android:key="pref_key_storage_settings">
+        android:key="general_setting_key">
         <ListPreference
             android:key="interval_key"
             android:title="@string/interval_setting"
@@ -11,8 +11,26 @@
             android:dialogTitle="@string/interval_setting"
             android:entries="@array/interval_array"
             android:entryValues="@array/interval_array_values"/>
+        <ListPreference
+            android:key="source_key"
+            android:title="@string/source_setting"
+            android:summary="%s"
+            android:defaultValue="@string/source_setting_default"
+            android:dialogTitle="@string/source_setting"
+            android:entries="@array/source_array"
+            android:entryValues="@array/source_array_values"/>
+        <CheckBoxPreference
+            android:key="Wifi_only_key"
+            android:title="@string/wifi_only_setting"
+            android:defaultValue="true"/>
     </PreferenceCategory>
-    <Preference android:title="Apply"
-        android:key="@string/apply_button"
-        android:summary="Apply changes and restart the service"/>
+    <PreferenceCategory
+        android:title="System"
+        android:key="system_setting_key">
+        <Preference
+            android:title="Apply"
+            android:key="@string/apply_button"
+            android:summary="Apply changes and restart the service"/>
+    </PreferenceCategory>
+
 </PreferenceScreen>
