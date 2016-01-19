@@ -43,17 +43,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener,
     private void applyChanges(){
         Intent i = new Intent(getApplicationContext(), WallpaperSetupReceiver.class);
         i.setAction(WallpaperSetupReceiver.ACTION);
+        i.putExtra("interval", Long.valueOf(selectedInterval));
         sendBroadcast(i);
     }
-/*
-    private void setAlarm(){
-        Intent i = new Intent(getApplicationContext(), WallpaperAlarmReceiver.class);
-        final PendingIntent pI = PendingIntent.getBroadcast(this, WallpaperAlarmReceiver.REQUEST_CODE, i, PendingIntent.FLAG_UPDATE_CURRENT);
-        long initialTime = System.currentTimeMillis();
-        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTime, selectedInterval, pI);
-    }
-*/
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch(parent.getId()){

@@ -14,10 +14,13 @@ public class WallpaperSetupReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Long interval = intent.getLongExtra("interval", 60000);
+
         Intent i = new Intent(context, WallpaperAlarmReceiver.class);
         final PendingIntent pI = PendingIntent.getBroadcast(context, WallpaperAlarmReceiver.REQUEST_CODE, i, PendingIntent.FLAG_UPDATE_CURRENT);
+
         long initialTime = System.currentTimeMillis();
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTime, 1000, pI);
+        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTime, interval, pI);
     }
 }
