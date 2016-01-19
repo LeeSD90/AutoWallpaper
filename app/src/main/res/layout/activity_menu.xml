@@ -31,7 +31,8 @@
         android:layout_alignBottom="@+id/intervalText"
         android:layout_alignTop="@+id/intervalText"
         android:layout_alignRight="@+id/settingsText"
-        android:layout_alignEnd="@+id/settingsText" />
+        android:layout_alignEnd="@+id/settingsText"
+        android:spinnerMode="dialog" />
 
     <View
         android:layout_width="wrap_content"

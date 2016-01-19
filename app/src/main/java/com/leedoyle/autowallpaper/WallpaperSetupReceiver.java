@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 /**
  * Created by Lee on 19/01/2016.
@@ -22,5 +23,7 @@ public class WallpaperSetupReceiver extends BroadcastReceiver {
         long initialTime = System.currentTimeMillis();
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTime, interval, pI);
+
+        Toast.makeText(context, "Settings applied!", Toast.LENGTH_SHORT).show();
     }
 }
