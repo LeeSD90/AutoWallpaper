@@ -26,7 +26,7 @@ public class PageParser {
 
     public Bitmap ParseForRandomWall(String page){
         Thread t = new Thread(){
-            Bitmap image;
+            Bitmap image = null;
             String imageHLink = "";
             int upperLimit;
             @Override
@@ -54,6 +54,7 @@ public class PageParser {
                 }
                 catch (Exception e){
                     e.printStackTrace();
+                    Log.d(TAG, "Unable to obtain wallpaper link, no internet?");
                 }
             }
         };
@@ -63,18 +64,21 @@ public class PageParser {
         }
         catch(Exception e){
             e.printStackTrace();
+            Log.d(TAG, "test");
         }
         return image;
     }
 
     private Bitmap DownloadToBitmap(String url){       //Gets a bitmap from an image url
-        Bitmap image = null;
+        Bitmap image;
         try {
             URL newUrl = new URL(url);
             image = BitmapFactory.decodeStream(newUrl.openConnection().getInputStream());
         }
         catch(Exception e){
             e.printStackTrace();
+            Log.d(TAG, "Unable to obtain bitmap, no internet?");
+            return null;
         }
 
         return image;

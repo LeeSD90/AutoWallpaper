@@ -32,7 +32,9 @@ public class AutoWallpaperService extends Service {
             String htmlPage = "";
             Log.d(TAG, "About to parse");
             Bitmap image = pageParser.ParseForRandomWall(htmlPage);
-            WallpaperManager.getInstance(this).setBitmap(image);
+            if(image != null) {
+                WallpaperManager.getInstance(this).setBitmap(image);
+            }
             Log.d(TAG, "Done parsing");
         }
         catch(Exception e){
