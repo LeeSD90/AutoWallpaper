@@ -14,21 +14,13 @@
 
     <string-array name="source_array">
         <item>http://androidwallpape.rs/</item>
-        <item>10 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Daily</item>
+        <item>TODO</item>
+        <item>TODO</item>
     </string-array>
     <string-array name="source_array_values">
         <item>http://androidwallpape.rs/</item>
-        <item>600000</item>
-        <item>1800000</item>
-        <item>3600000</item>
-        <item>10800000</item>
-        <item>21600000</item>
-        <item>86400000</item>
+        <item>TODO</item>
+        <item>TODO</item>
     </string-array>
 
     <string-array name="interval_array">

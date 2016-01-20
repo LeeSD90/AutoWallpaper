@@ -38,7 +38,11 @@ public class WallpaperAlarmSetupReceiver extends BroadcastReceiver {
                 }
                 catch(Exception e){
                     Log.e(TAG, "Alarms not cancelled, perhaps none were set?");
-            }
+                }
+                break;
+            case "android.intent.action.BOOT_COMPLETED":
+                Log.d("TESTA", "booted");
+                break;
         }
     }
 }
