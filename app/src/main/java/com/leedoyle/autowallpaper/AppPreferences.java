@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 /**
  * Created by Lee on 19/01/2016.
@@ -16,15 +17,20 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        Preference applyButton = (Preference) findPreference("apply_key");
+        Preference applyButton = (Preference) findPreference("restart_key");
         applyButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
             @Override
             public boolean onPreferenceClick(Preference preference){
-                Intent i = new Intent(getActivity(), WallpaperAlarmSetupReceiver.class);
-                i.setAction(WallpaperAlarmSetupReceiver.SETUP);
-                i.putExtra("interval", Long.valueOf(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("interval_key", "")));
-                getActivity().sendBroadcast(i);
-                return true;
+                if(PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("service_toggle_key", false)) {
+                    Intent i = new Intent(getActivity(), WallpaperAlarmSetupReceiver.class);
+                    i.setAction(WallpaperAlarmSetupReceiver.SETUP);
+                    i.putExtra("interval", Long.valueOf(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("interval_key", "")));
+                    getActivity().sendBroadcast(i);
+                    return true;
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Unable to restart the service, is it enabled?", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
             }
         });
     }

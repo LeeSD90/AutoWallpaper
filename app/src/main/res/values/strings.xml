@@ -8,7 +8,7 @@
     <string name="interval_setting_default">60000</string>
     <string name="source_setting">Source website</string>
     <string name="source_setting_default">http://androidwallpape.rs/</string>
-    <string name="apply_button">Apply</string>
+    <string name="restart_button">Restart service</string>
     <string name="service_toggle">Enabled</string>
     <string name="wifi_only_setting">Download over WiFi only</string>
 
