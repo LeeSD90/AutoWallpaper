@@ -24,45 +24,50 @@ public class PageParser {
         this.image = image;
     }
 
-    public Bitmap ParseForRandomWall(String page){
-        Thread t = new Thread(){
-            Bitmap image = null;
-            String imageHLink = "";
-            int upperLimit;
-            @Override
-            public void run(){
-                try {
-                    Document doc = Jsoup.connect("http://androidwallpape.rs/").get();
-                    Element images = doc.getElementById("wallpapers");
-                    Element firstImage = images.select("li").first();
-                    upperLimit = Integer.parseInt(firstImage.attr("data-id")); //Set upper limit for RNG to the id of the latest image
-                    Elements links = doc.getElementsByTag("li");
-                    Random r = new Random();
-                    int seed = r.nextInt((upperLimit + 1)- 1) + 1;          //Generate random number for wallpaper to pick
-                    for(Element link : links) {
-                        if (link.attr("data-id").equals(Integer.toString(seed))) {
-                            Elements imageLinks = link.getElementsByTag("img");
-                            for(Element imageLink : imageLinks){
-                                Log.d(TAG, imageLink.toString());
-                                imageHLink = imageLink.attr("data-original");
-                                image = DownloadToBitmap(imageHLink);
-                                setImage(image);
+    public Bitmap ParseForRandomWall(String site){
+        switch(site) {
+            case "http://androidwallpape.rs/":
+                Thread t = new Thread() {
+                    Bitmap image = null;
+                    String imageHLink = "";
+                    int upperLimit;
+
+                    @Override
+                    public void run() {
+                        try {
+                            Document doc = Jsoup.connect("http://androidwallpape.rs/").get();
+                            Element images = doc.getElementById("wallpapers");
+                            Element firstImage = images.select("li").first();
+                            upperLimit = Integer.parseInt(firstImage.attr("data-id")); //Set upper limit for RNG to the id of the latest image
+                            Elements links = doc.getElementsByTag("li");
+                            Random r = new Random();
+                            int seed = r.nextInt((upperLimit + 1) - 1) + 1;          //Generate random number for wallpaper to pick
+                            for (Element link : links) {
+                                if (link.attr("data-id").equals(Integer.toString(seed))) {
+                                    Elements imageLinks = link.getElementsByTag("img");
+                                    for (Element imageLink : imageLinks) {
+                                        Log.d(TAG, imageLink.toString());
+                                        imageHLink = imageLink.attr("data-original");
+                                        image = DownloadToBitmap(imageHLink);
+                                        setImage(image);
+                                    }
+                                }
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d(TAG, "Unable to obtain wallpaper link, no internet?");
                         }
                     }
-                }
-                catch (Exception e){
+                };
+                t.start();
+                try {
+                    t.join();
+                } catch (Exception e) {
                     e.printStackTrace();
-                    Log.d(TAG, "Unable to obtain wallpaper link, no internet?");
                 }
-            }
-        };
-        t.start();
-        try{
-            t.join();
-        }
-        catch(Exception e){
-            e.printStackTrace();
+                break;
+            default:
+                return null;
         }
         return image;
     }

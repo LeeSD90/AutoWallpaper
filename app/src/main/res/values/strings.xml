@@ -4,7 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="settings_category">General Settings</string>
-    <string name="interval_setting">Timer Interval</string>
+    <string name="interval_setting">Timer interval</string>
     <string name="interval_setting_default">60000</string>
     <string name="source_setting">Source website</string>
     <string name="source_setting_default">http://androidwallpape.rs/</string>
