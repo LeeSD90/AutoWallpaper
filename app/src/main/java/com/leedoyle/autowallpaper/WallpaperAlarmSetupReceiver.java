@@ -24,6 +24,7 @@ public class WallpaperAlarmSetupReceiver extends BroadcastReceiver {
 
         switch(intent.getAction()) {
             case SETUP:
+            case "android.intent.action.BOOT_COMPLETED":
                 Long interval = intent.getLongExtra("interval", 60000);
 
                 long initialTime = System.currentTimeMillis();
@@ -39,9 +40,6 @@ public class WallpaperAlarmSetupReceiver extends BroadcastReceiver {
                 catch(Exception e){
                     Log.e(TAG, "Alarms not cancelled, perhaps none were set?");
                 }
-                break;
-            case "android.intent.action.BOOT_COMPLETED":
-                Log.d("TESTA", "booted");
                 break;
         }
     }

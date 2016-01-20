@@ -38,7 +38,7 @@ public class AutoWallpaperService extends IntentService {
         } else return true;
     }
 
-    public Bitmap getRandomWallpaper(String site){
+    public Bitmap getRandomWallpaper(String site){      //Attempts to retrieve a random wallpaper from the selected website
         try {
             Log.d(TAG, "About to parse");
             Bitmap image = pageParser.ParseForRandomWall(site);
