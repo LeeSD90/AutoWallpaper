@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
+        android:title="System"
+        android:key="system_setting_key">
+        <SwitchPreference
+            android:title="@string/service_toggle"
+            android:key="service_toggle_key"
+            android:defaultValue="true">
+        </SwitchPreference>
+        <Preference
+            android:title="@string/apply_button"
+            android:key="apply_key"
+            android:summary="Apply changes and restart the service"/>
+    </PreferenceCategory>
+    <PreferenceCategory
         android:title="@string/settings_category"
         android:key="general_setting_key">
         <ListPreference
@@ -24,13 +37,4 @@
             android:title="@string/wifi_only_setting"
             android:defaultValue="true"/>
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="System"
-        android:key="system_setting_key">
-        <Preference
-            android:title="Apply"
-            android:key="@string/apply_button"
-            android:summary="Apply changes and restart the service"/>
-    </PreferenceCategory>
-
 </PreferenceScreen>

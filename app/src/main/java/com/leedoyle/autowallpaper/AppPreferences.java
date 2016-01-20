@@ -16,12 +16,12 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        Preference applyButton = (Preference) findPreference(getString(R.string.apply_button));
+        Preference applyButton = (Preference) findPreference("apply_key");
         applyButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
             @Override
             public boolean onPreferenceClick(Preference preference){
-                Intent i = new Intent(getActivity(), WallpaperSetupReceiver.class);
-                i.setAction(WallpaperSetupReceiver.ACTION);
+                Intent i = new Intent(getActivity(), WallpaperAlarmSetupReceiver.class);
+                i.setAction(WallpaperAlarmSetupReceiver.SETUP);
                 i.putExtra("interval", Long.valueOf(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("interval_key", "")));
                 getActivity().sendBroadcast(i);
                 return true;
@@ -45,9 +45,14 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Intent i = new Intent(getActivity(), WallpaperSetupReceiver.class);
-        i.setAction(WallpaperSetupReceiver.ACTION);
-        i.putExtra("interval", Long.valueOf(sharedPreferences.getString("interval_key", "")));
+        Intent i = new Intent(getActivity(), WallpaperAlarmSetupReceiver.class);
+        if(sharedPreferences.getBoolean("service_toggle_key", false)) {
+            i.setAction(WallpaperAlarmSetupReceiver.SETUP);
+            i.putExtra("interval", Long.valueOf(sharedPreferences.getString("interval_key", "")));
+        }
+        else {
+            i.setAction(WallpaperAlarmSetupReceiver.CANCEL);
+        }
         getActivity().sendBroadcast(i);
     }
 }

@@ -24,8 +24,7 @@ public class PageParser {
         this.image = image;
     }
 
-    public Bitmap ParseForRandomWall(String site){
-        switch(site) {
+    public Bitmap ParseForRandomWall(String site){        switch(site) {
             case "http://androidwallpape.rs/":
                 Thread t = new Thread() {
                     Bitmap image = null;
