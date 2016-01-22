@@ -25,7 +25,7 @@ public class AutoWallpaperService extends IntentService {
 
         if(CheckConnectionStatus(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()))){
             Log.d(TAG, "Getting new wallpaper");
-            getRandomWallpaper(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("source_key", ""));
+            setRandomWallpaper(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("source_key", ""));
         } else Log.d(TAG, "Download over WiFi only enabled, but no Wifi is present");
     }
 
@@ -38,19 +38,21 @@ public class AutoWallpaperService extends IntentService {
         } else return true;
     }
 
-    public Bitmap getRandomWallpaper(String site){      //Attempts to retrieve a random wallpaper from the selected website
+    public boolean setRandomWallpaper(String site){      //Attempts to retrieve a random wallpaper from the selected website
         try {
             Log.d(TAG, "About to parse");
             Bitmap image = pageParser.ParseForRandomWall(site);
             if(image != null) {
                 WallpaperManager.getInstance(this).setBitmap(image);
-            }
-            Log.d(TAG, "Done parsing");
+                Log.d(TAG, "Done parsing");
+                return true;
+            } else Log.d(TAG, "Image could not be retrieved");
+            return false;
         }
         catch(Exception e){
             e.printStackTrace();
+            return false;
         }
-        return null;
     }
 
     @Override
