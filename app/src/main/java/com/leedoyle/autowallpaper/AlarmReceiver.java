@@ -11,16 +11,19 @@ import android.widget.Toast;
 /**
  * Created by Lee on 19/01/2016.
  */
-public class WallpaperAlarmSetupReceiver extends BroadcastReceiver {
+public class AlarmReceiver extends BroadcastReceiver {
     public static final String SETUP = "com.leedoyle.autowallpaper.setup";
     public static final String CANCEL = "com.leedoyle.autowallpaper.cancel";
+    public static final String TRIGGER = "com.leedoyle.autowallpaper.alarm";
+    public static final int REQUEST_CODE = 99;
     private static final String TAG = "AlarmSetupReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(context, WallpaperAlarmReceiver.class);
-        final PendingIntent pI = PendingIntent.getBroadcast(context, WallpaperAlarmReceiver.REQUEST_CODE, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent i = new Intent(context, this.getClass());
+        i.setAction(TRIGGER);
+        final PendingIntent pI = PendingIntent.getBroadcast(context, REQUEST_CODE, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
         switch(intent.getAction()) {
             case SETUP:
@@ -30,7 +33,7 @@ public class WallpaperAlarmSetupReceiver extends BroadcastReceiver {
                 long initialTime = System.currentTimeMillis();
                 alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTime, interval, pI);
 
-                Toast.makeText(context, "Service enabled and settings applied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Service enabled", Toast.LENGTH_SHORT).show();
                 break;
             case CANCEL:
                 try{
@@ -40,6 +43,11 @@ public class WallpaperAlarmSetupReceiver extends BroadcastReceiver {
                 catch(Exception e){
                     Log.e(TAG, "Alarms not cancelled, perhaps none were set?");
                 }
+                break;
+            case TRIGGER:
+                Intent iA = new Intent(context, AutoWallpaperService.class);
+                context.startService(iA);
+                Log.d(TAG, "Triggered");
                 break;
         }
     }

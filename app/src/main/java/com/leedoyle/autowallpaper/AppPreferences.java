@@ -10,9 +10,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-/**
- * Created by Lee on 19/01/2016.
- */
 public class AppPreferences extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -61,13 +58,13 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Intent i = new Intent(getActivity(), WallpaperAlarmSetupReceiver.class);
+        Intent i = new Intent(getActivity(), AlarmReceiver.class);
         if(sharedPreferences.getBoolean("service_toggle_key", false)) {
-            i.setAction(WallpaperAlarmSetupReceiver.SETUP);
+            i.setAction(AlarmReceiver.SETUP);
             i.putExtra("interval", Long.valueOf(sharedPreferences.getString("interval_key", "")));
         }
         else {
-            i.setAction(WallpaperAlarmSetupReceiver.CANCEL);
+            i.setAction(AlarmReceiver.CANCEL);
         }
         getActivity().sendBroadcast(i);
     }

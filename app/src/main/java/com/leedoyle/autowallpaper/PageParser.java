@@ -24,6 +24,7 @@ public class PageParser {
         this.image = image;
     }
 
+    //TODO Tidy this up it's a mess!
     public Bitmap ParseForRandomWall(String site){
         switch(site) {
             case "http://androidwallpape.rs/":
