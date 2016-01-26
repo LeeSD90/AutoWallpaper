@@ -39,7 +39,12 @@
         <CheckBoxPreference
             android:key="Wifi_only_key"
             android:title="@string/wifi_only_setting"
+            android:summary="Only obtain wallpapers with a WiFi connection"
             android:defaultValue="true"/>
-
+        <CheckBoxPreference
+            android:key="data_allowed_key"
+            android:title="@string/data_allowed_setting"
+            android:summary="Allow downloads via mobile network"
+            android:defaultValue="false"/>
     </PreferenceCategory>
 </PreferenceScreen>

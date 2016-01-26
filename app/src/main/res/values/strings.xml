@@ -9,7 +9,8 @@
     <string name="source_setting_default">http://androidwallpape.rs/</string>
     <string name="wallpaper_button">Refresh now</string>
     <string name="service_toggle">Enabled</string>
-    <string name="wifi_only_setting">Download over WiFi only</string>
+    <string name="wifi_only_setting">WiFi only</string>
+    <string name="data_allowed_setting">Roaming</string>
     <string name="network_category">Network</string>
 
     <string-array name="source_array">
