@@ -62,6 +62,7 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         if(sharedPreferences.getBoolean("service_toggle_key", false)) {
             i.setAction(AlarmReceiver.SETUP);
             i.putExtra("interval", Long.valueOf(sharedPreferences.getString("interval_key", "")));
+            i.putExtra("key", key);
         }
         else {
             i.setAction(AlarmReceiver.CANCEL);

@@ -32,8 +32,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
                 long initialTime = System.currentTimeMillis();
                 alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTime, interval, pI);
-
-                Toast.makeText(context, "Service enabled", Toast.LENGTH_SHORT).show();
+                if(intent.getStringExtra("key").equals("service_toggle_key")) Toast.makeText(context, "Service enabled", Toast.LENGTH_SHORT).show(); //Provide feedback if the enable button was toggled
                 break;
             case CANCEL:
                 try{
@@ -47,7 +46,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             case TRIGGER:
                 Intent iA = new Intent(context, AutoWallpaperService.class);
                 context.startService(iA);
-                Log.d(TAG, "Triggered");
                 break;
         }
     }

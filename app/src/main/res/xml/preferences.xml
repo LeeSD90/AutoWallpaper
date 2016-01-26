@@ -11,7 +11,7 @@
         <Preference
             android:title="@string/wallpaper_button"
             android:key="wallpaper_button_key"
-            android:summary="Get a new wallpaper right now"/>
+            android:summary="Get a new wallpaper right now!"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_category"
@@ -40,5 +40,6 @@
             android:key="Wifi_only_key"
             android:title="@string/wifi_only_setting"
             android:defaultValue="true"/>
+
     </PreferenceCategory>
 </PreferenceScreen>
