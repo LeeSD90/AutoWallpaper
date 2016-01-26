@@ -37,14 +37,16 @@
         android:title="@string/network_category"
         android:key="network_setting_key">
         <CheckBoxPreference
-            android:key="Wifi_only_key"
+            android:key="wifi_only_key"
             android:title="@string/wifi_only_setting"
-            android:summary="Only obtain wallpapers with a WiFi connection"
+            android:summary="Only obtain wallpapers using a WiFi connection"
+            android:disableDependentsState="true"
             android:defaultValue="true"/>
         <CheckBoxPreference
             android:key="data_allowed_key"
             android:title="@string/data_allowed_setting"
             android:summary="Allow downloads via mobile network"
+            android:dependency="wifi_only_key"
             android:defaultValue="false"/>
     </PreferenceCategory>
 </PreferenceScreen>

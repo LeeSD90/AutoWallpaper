@@ -27,30 +27,6 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
 
         wifiToggle.setOnPreferenceClickListener(this);
         wallpaperButton.setOnPreferenceClickListener(this);
-/*
-        wallpaperButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
-            @Override
-            public boolean onPreferenceClick(Preference preference){
-                if(PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("service_toggle_key", false)) {
-                    if(preference.getSharedPreferences().getBoolean("Wifi_only_key", true)){
-                        Log.d("AutoWallpaper", "Wifi only enabled");
-                        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
-                        if(cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()){
-                            Intent i = new Intent(getActivity(), AutoWallpaperService.class);
-                            getActivity().startService(i);
-                            return true;
-                        } else return false;
-                    } else {
-                        Intent i = new Intent(getActivity(), AutoWallpaperService.class);
-                        getActivity().startService(i);
-                        return true;
-                    }
-                } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Unable to obtain a new wallpaper, is the service enabled?", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            }
-        });*/
     }
 
     @Override

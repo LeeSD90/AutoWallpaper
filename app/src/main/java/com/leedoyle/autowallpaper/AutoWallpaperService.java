@@ -26,16 +26,18 @@ public class AutoWallpaperService extends IntentService {
         if(CheckConnectionStatus(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()))){
             Log.d(TAG, "Getting new wallpaper");
             setRandomWallpaper(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("source_key", ""));
-        } else Log.d(TAG, "Download over WiFi only enabled, but no Wifi is present");
+        } else Log.d(TAG, "No suitable connection is available to download over");
     }
 
     private boolean CheckConnectionStatus(SharedPreferences sharedPreferences){
         Log.d(TAG, "Checking connection settings");
-        if(sharedPreferences.getBoolean("Wifi_only_key", true)){
-            Log.d(TAG, "Wifi only enabled");
-            ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
-            return cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
-        } else return true;
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+        if(cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) return true;                                               // If a WiFi connection is present
+        else if(sharedPreferences.getBoolean("data_allowed_key", false) && !sharedPreferences.getBoolean("Wifi_only_key", true)){     // If data roaming is enabled and no WiFi is present
+            Log.d(TAG, "Data roaming is enabled and no WiFi is present");
+            return cm.getActiveNetworkInfo().isRoaming();
+        }
+        else return false;                                                                                                            // If a WiFi connection is not present, and data roaming is either disabled or unavailable
     }
 
     public boolean setRandomWallpaper(String site){      //Attempts to retrieve a random wallpaper from the selected website
