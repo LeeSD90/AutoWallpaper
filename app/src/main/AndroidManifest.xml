@@ -23,12 +23,7 @@
         </activity>
 
         <receiver
-            android:name=".WallpaperAlarmReceiver"
-            android:process=":remote">
-        </receiver>
-
-        <receiver
-            android:name=".WallpaperAlarmSetupReceiver"
+            android:name=".AlarmReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
