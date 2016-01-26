@@ -10,6 +10,7 @@ public class AutoWallpaperActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //On launch of the app, immediately go to app preferences
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new AppPreferences()).commit();
     }

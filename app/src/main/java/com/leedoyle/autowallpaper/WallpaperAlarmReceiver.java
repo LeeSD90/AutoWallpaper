@@ -6,6 +6,7 @@ import android.content.Intent;
 
 //TODO Start adding additional source websites
 //TODO Figure out how best to add options based on individual websites
+//TODO Merge this with WallpaperAlarmSetupReceiver ?
 
 /**
  * Created by Lee on 19/01/2016.

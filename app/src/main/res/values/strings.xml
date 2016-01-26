@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">Auto Wallpaper</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="settings_category">General Settings</string>
-    <string name="interval_setting">Timer interval</string>
+    <string name="interval_setting">Refresh interval</string>
     <string name="interval_setting_default">60000</string>
     <string name="source_setting">Source website</string>
     <string name="source_setting_default">http://androidwallpape.rs/</string>
-    <string name="wallpaper_button">Refresh</string>
+    <string name="wallpaper_button">Refresh now</string>
     <string name="service_toggle">Enabled</string>
     <string name="wifi_only_setting">Download over WiFi only</string>
     <string name="network_category">Network</string>
