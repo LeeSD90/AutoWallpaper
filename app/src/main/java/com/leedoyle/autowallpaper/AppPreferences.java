@@ -2,10 +2,12 @@ package com.leedoyle.autowallpaper;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -17,18 +19,26 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        Preference applyButton = (Preference) findPreference("restart_key");
-        applyButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
+        Preference wallpaperButton = findPreference("wallpaper_button_key");
+        wallpaperButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
             @Override
             public boolean onPreferenceClick(Preference preference){
                 if(PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("service_toggle_key", false)) {
-                    Intent i = new Intent(getActivity(), WallpaperAlarmSetupReceiver.class);
-                    i.setAction(WallpaperAlarmSetupReceiver.SETUP);
-                    i.putExtra("interval", Long.valueOf(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("interval_key", "")));
-                    getActivity().sendBroadcast(i);
-                    return true;
+                    if(preference.getSharedPreferences().getBoolean("Wifi_only_key", true)){
+                        Log.d("AutoWallpaper", "Wifi only enabled");
+                        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
+                        if(cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()){
+                            Intent i = new Intent(getActivity(), AutoWallpaperService.class);
+                            getActivity().startService(i);
+                            return true;
+                        } else return false;
+                    } else {
+                        Intent i = new Intent(getActivity(), AutoWallpaperService.class);
+                        getActivity().startService(i);
+                        return true;
+                    }
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Unable to restart the service, is it enabled?", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Unable to obtain a new wallpaper, is the service enabled?", Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }

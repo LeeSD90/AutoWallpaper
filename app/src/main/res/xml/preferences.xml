@@ -9,9 +9,9 @@
             android:defaultValue="true">
         </SwitchPreference>
         <Preference
-            android:title="@string/restart_button"
-            android:key="restart_key"
-            android:summary="Force restart the service with the current settings"/>
+            android:title="@string/wallpaper_button"
+            android:key="wallpaper_button_key"
+            android:summary="Get a new wallpaper right now"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_category"
@@ -32,6 +32,10 @@
             android:dialogTitle="@string/source_setting"
             android:entries="@array/source_array"
             android:entryValues="@array/source_array_values"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/network_category"
+        android:key="network_setting_key">
         <CheckBoxPreference
             android:key="Wifi_only_key"
             android:title="@string/wifi_only_setting"
