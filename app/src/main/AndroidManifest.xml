@@ -28,6 +28,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="com.leedoyle.autowallpaper.setup"/>
+                <action android:name="com.leedoyle.autowallpaper.cancel"/>
+                <action android:name="com.leedoyle.autowallpaper.trigger"/>
             </intent-filter>
         </receiver>
 

@@ -12,9 +12,6 @@ import org.jsoup.select.Elements;
 import java.net.URL;
 import java.util.Random;
 
-/**
- * Created by Lee on 14/01/2016.
- */
 public class PageParser {
 
     private static final String TAG = "PageParser";

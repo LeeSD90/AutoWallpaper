@@ -32,10 +32,10 @@ public class AutoWallpaperService extends IntentService {
     private boolean CheckConnectionStatus(SharedPreferences sharedPreferences){
         Log.d(TAG, "Checking connection settings");
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
-        if(cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) return true;                                               // If a WiFi connection is present
+        if(cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()){ Log.d(TAG, "Wifi connection detected"); return true;}     // If a WiFi connection is present
         else if(sharedPreferences.getBoolean("data_allowed_key", false) && !sharedPreferences.getBoolean("Wifi_only_key", true)){     // If data roaming is enabled and no WiFi is present
             Log.d(TAG, "Data roaming is enabled and no WiFi is present");
-            return cm.getActiveNetworkInfo().isRoaming();
+            return cm.getActiveNetworkInfo().isRoaming();                                                                             // Return roaming connectivity status
         }
         else return false;                                                                                                            // If a WiFi connection is not present, and data roaming is either disabled or unavailable
     }

@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 public class AppPreferences extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener{
     private final static String TAG = "AutoWallpaper";
-    Preference wifiToggle;
-    Preference dataToggle;
-    Preference wallpaperButton;
+    Preference wifiToggle, dataToggle, wallpaperButton, saveButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -24,9 +22,11 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         wifiToggle = findPreference("wifi_only_key");
         dataToggle = findPreference("data_allowed_key");
         wallpaperButton = findPreference("wallpaper_button_key");
+        saveButton = findPreference("save_button_key");
 
         wifiToggle.setOnPreferenceClickListener(this);
         wallpaperButton.setOnPreferenceClickListener(this);
+        saveButton.setOnPreferenceClickListener(this);
     }
 
     @Override
@@ -43,15 +43,15 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
     }
 
+    private boolean serviceEnabled(SharedPreferences sP){ return sP.getBoolean("service_toggle_key", false);}
+
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Intent i = new Intent(getActivity(), AlarmReceiver.class);
-        if(sharedPreferences.getBoolean("service_toggle_key", false)) {
+        if(serviceEnabled(sharedPreferences)) {
             i.setAction(AlarmReceiver.SETUP);
-            i.putExtra("interval", Long.valueOf(sharedPreferences.getString("interval_key", "")));
-            i.putExtra("key", key);
-        }
-        else {
+        } else if (key.equals("service_toggle_key")){
+            Log.d(TAG, "Service disabled, cancelling all alarms");
             i.setAction(AlarmReceiver.CANCEL);
         }
         getActivity().sendBroadcast(i);
@@ -59,26 +59,16 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        switch(preference.getKey()){
+        switch(preference.getKey()) {
             case "wallpaper_button_key":
-                if(PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("service_toggle_key", false)) {
-                    if(preference.getSharedPreferences().getBoolean("wifi_only_key", true)){
-                        Log.d(TAG, "Wifi only enabled");
-                        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
-                        if(cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()){
-                            Intent i = new Intent(getActivity(), AutoWallpaperService.class);
-                            getActivity().startService(i);
-                            break;
-                        } else Log.d(TAG, "No suitable connection is available to download over"); break;
-                    } else {
-                        Intent i = new Intent(getActivity(), AutoWallpaperService.class);
-                        getActivity().startService(i);
-                        break;
-                    }
-                } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Unable to obtain a new wallpaper, is the service enabled?", Toast.LENGTH_SHORT).show();
-                    break;
+                if(serviceEnabled(PreferenceManager.getDefaultSharedPreferences(getActivity()))){
+                    Intent i = new Intent(getActivity(), AlarmReceiver.class);
+                    i.setAction(AlarmReceiver.TRIGGER);
+                    getActivity().sendBroadcast(i);
                 }
+                break;
+            case "save_button_key":
+                break;
             default:
                 break;
         }

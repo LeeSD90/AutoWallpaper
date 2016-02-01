@@ -12,6 +12,10 @@
             android:title="@string/wallpaper_button"
             android:key="wallpaper_button_key"
             android:summary="Get a new wallpaper right now!"/>
+        <Preference
+            android:title="@string/save_button"
+            android:key="save_button_key"
+            android:summary="Save the current wallpaper to internal storage"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_category"
@@ -46,7 +50,7 @@
             android:key="data_allowed_key"
             android:title="@string/data_allowed_setting"
             android:summary="Allow downloads via mobile network"
-            android:dependency="wifi_only_key"
-            android:defaultValue="false"/>
+            android:defaultValue="false"
+            android:dependency="wifi_only_key"/>
     </PreferenceCategory>
 </PreferenceScreen>
