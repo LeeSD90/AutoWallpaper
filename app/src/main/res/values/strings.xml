@@ -12,7 +12,7 @@
     <string name="wifi_only_setting">WiFi only</string>
     <string name="data_allowed_setting">Roaming</string>
     <string name="network_category">Network</string>
-    <string name="save_button">Save current wallpaper</string>
+    <string name="save_button">Save</string>
 
     <string-array name="source_array">
         <item>http://androidwallpape.rs/</item>

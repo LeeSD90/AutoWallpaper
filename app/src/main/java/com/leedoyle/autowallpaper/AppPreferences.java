@@ -1,12 +1,24 @@
 package com.leedoyle.autowallpaper;
 
+import android.app.WallpaperManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Random;
 
 public class AppPreferences extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener{
     private final static String TAG = "AutoWallpaper";
@@ -66,10 +78,42 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
                 }
                 break;
             case "save_button_key":
+                try {
+                    saveWallpaper();
+                }
+                catch(Exception e){
+                        e.printStackTrace();
+                }
                 break;
             default:
                 break;
         }
         return true;
+    }
+
+    //TODO Maybe prevent duplicates by assigning the name based on the image saved, rather than randomly assigning it?
+    private void saveWallpaper() throws Exception{
+        Bitmap wallpaper = ((BitmapDrawable)WallpaperManager.getInstance(getActivity()).getDrawable()).getBitmap();
+
+        String dirRoot = Environment.getExternalStorageDirectory().toString();
+        File wallpaperDir = new File(dirRoot + "/wallpapers");
+        wallpaperDir.mkdirs();
+        Random ran = new Random();
+        int n = ran.nextInt(90000);
+        String fileName = "Image_" + n + ".jpg";
+        File file = new File(wallpaperDir, fileName);
+        while(file.exists()) file = new File(wallpaperDir, "Image_" + ran.nextInt(90000) + ".jpg");
+        FileOutputStream fos = new FileOutputStream(file);
+        try{
+            wallpaper.compress(Bitmap.CompressFormat.JPEG, 90, fos);
+            fos.flush();
+            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            fos.close();
+        }
     }
 }
