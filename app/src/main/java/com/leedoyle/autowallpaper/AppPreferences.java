@@ -1,13 +1,10 @@
 package com.leedoyle.autowallpaper;
 
 import android.app.WallpaperManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +12,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -108,6 +106,7 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
             wallpaper.compress(Bitmap.CompressFormat.JPEG, 90, fos);
             fos.flush();
             getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+            Toast.makeText(getActivity().getApplicationContext(), "Wallpaper saved!", Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
             e.printStackTrace();
