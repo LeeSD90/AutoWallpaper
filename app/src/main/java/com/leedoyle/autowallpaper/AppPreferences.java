@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -105,7 +106,11 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         try{
             wallpaper.compress(Bitmap.CompressFormat.JPEG, 90, fos);
             fos.flush();
-            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+            MediaScannerConnection.scanFile(getActivity(), new String[]{file.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener(){
+                public void onScanCompleted(String path, Uri uri){
+                    Log.i(TAG, "Scan completed.");
+                }
+            });
             Toast.makeText(getActivity().getApplicationContext(), "Wallpaper saved!", Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
