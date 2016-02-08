@@ -101,7 +101,7 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         int n = ran.nextInt(90000);
         String fileName = "Image_" + n + ".jpg";
         File file = new File(wallpaperDir, fileName);
-        while(file.exists()) file = new File(wallpaperDir, "Image_" + ran.nextInt(90000) + ".jpg");
+        while(file.exists()) file = new File(wallpaperDir, "Image_" + ran.nextInt(90000) + ".jpg"); //TODO test this
         FileOutputStream fos = new FileOutputStream(file);
         try{
             wallpaper.compress(Bitmap.CompressFormat.JPEG, 90, fos);
