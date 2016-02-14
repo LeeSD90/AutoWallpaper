@@ -43,7 +43,7 @@ public class AutoWallpaperService extends IntentService {
     public boolean setRandomWallpaper(String site){      //Attempts to retrieve a random wallpaper from the selected website
         try {
             Log.d(TAG, "About to parse");
-            Bitmap image = pageParser.ParseForRandomWall(site);
+            Bitmap image = pageParser.getWallpaper(site);
             if(image != null) {
                 WallpaperManager.getInstance(this).setBitmap(image);
                 Log.d(TAG, "Done parsing");
