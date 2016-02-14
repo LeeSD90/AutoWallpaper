@@ -3,6 +3,7 @@ package com.leedoyle.autowallpaper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.webkit.WebView;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.Jsoup;
@@ -12,6 +13,7 @@ import org.jsoup.select.Elements;
 import java.net.URL;
 import java.util.Random;
 
+//TODO Class to form URLs so the user can select filters etc. per site?
 public class PageParser {
 
     private static final String TAG = "PageParser";
@@ -31,6 +33,7 @@ public class PageParser {
             public void run(){
                 try{
                     Document doc = Jsoup.connect(site).get();       //Get http page
+                    Log.d(TAG, doc.toString());
                     imageHLink = parsePage(site, doc);              //Get the hyperlink of a randomly selected wallpaper from the page
                     setImage(downloadToBitmap(imageHLink));         //Download the image to a bitmap
                 } catch(Exception e){
@@ -48,9 +51,9 @@ public class PageParser {
     }
 
     private String parsePage(String site, Document doc){
+        String imageHLink = "";
         switch(site) {
             case ANDROIDWALLPAPE_RS:
-                String imageHLink = "";
                 int upperLimit;
                 Element images = doc.getElementById("wallpapers");
                 Element firstImage = images.select("li").first();
@@ -71,6 +74,9 @@ public class PageParser {
                 }
                 return imageHLink;
             case ARTSTATION_COM:
+                //TODO Discovered this website is rendered almost entirely using javascript, gonna investigate using a WebView as a headless browser to render then parse it
+                Elements anImage = doc.getElementsByClass("image");
+                Log.d(TAG, anImage.toString());
                 return "";
             default:
                 return "";

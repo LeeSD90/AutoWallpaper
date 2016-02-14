@@ -8,7 +8,7 @@ import android.os.Bundle;
 //TODO Test the data roaming settings
 //TODO More source sites!
 
-public class AutoWallpaperActivity extends AppCompatActivity {
+public class LaunchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
