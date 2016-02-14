@@ -16,7 +16,7 @@
 
     <string-array name="source_array">
         <item>http://androidwallpape.rs/</item>
-        <item>https://www.artstation.com/</item>
+        <item>https://www.artstation.com/ (NYI!)</item>
         <item>TODO</item>
     </string-array>
     <string-array name="source_array_values">
