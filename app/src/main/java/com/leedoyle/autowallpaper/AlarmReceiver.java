@@ -47,6 +47,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             case TRIGGER:
                 Intent iA = new Intent(context, AutoWallpaperService.class);
                 context.startService(iA);
+                Toast.makeText(context, "Getting new wallpaper now...", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
