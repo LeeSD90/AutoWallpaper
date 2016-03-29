@@ -4,6 +4,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+//TODO Some refactor again before continuing
+//TODO Add lockscreen auto changer?
 //TODO Maybe write something to log the details of wallpaper changes to help debugging
 //TODO Test the data roaming settings
 //TODO More source sites!
