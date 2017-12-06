@@ -36,11 +36,8 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         wallpaperButton = findPreference("wallpaper_button_key");
         saveButton = findPreference("save_button_key");
         searchBox = findPreference("search_key");
-/*
-        searchBox.setEnabled(sp.getString("source_key", "NULL").equals("Google Images"));
-        EditTextPreference etp = (EditTextPreference) searchBox;
-        searchBox.setSummary(etp.getText());*/
-updateUI();
+
+        updateUI();
 
         wifiToggle.setOnPreferenceClickListener(this);
         wallpaperButton.setOnPreferenceClickListener(this);
@@ -74,13 +71,7 @@ updateUI();
             Log.d(TAG, "Service disabled, cancelling all alarms indefinitely");
             i.setAction(AlarmReceiver.CANCEL);
         }
-/*
-        if(key.equals("search_key")){
-            EditTextPreference etp = (EditTextPreference) searchBox;
-            searchBox.setSummary(etp.getText());
-        }
 
-        //searchBox.setEnabled(sharedPreferences.getString("source_key", "NULL").equals("Google Images"));*/
         updateUI();
         getActivity().sendBroadcast(i);
     }
