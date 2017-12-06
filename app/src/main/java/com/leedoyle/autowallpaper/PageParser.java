@@ -18,7 +18,7 @@ public class PageParser {
 
     private static final String TAG = "PageParser";
     private static final String ANDROIDWALLPAPE_RS = "http://androidwallpape.rs/";
-    private static final String ARTSTATION_COM = "https://www.artstation.com/";
+    private static final String TODO_COM = "https://www.TODO.com/";
     private Bitmap image;
 
     private void setImage(Bitmap image){
@@ -33,10 +33,11 @@ public class PageParser {
             public void run(){
                 try{
                     Document doc = Jsoup.connect(site).get();       //Get http page
-                    Log.d(TAG, doc.toString());
+                    //Log.d(TAG, doc.toString());
                     imageHLink = parsePage(site, doc);              //Get the hyperlink of a randomly selected wallpaper from the page
                     setImage(downloadToBitmap(imageHLink));         //Download the image to a bitmap
                 } catch(Exception e){
+                    Log.d(TAG, "Something bad happened");
                     e.printStackTrace();
                 }
             }
@@ -73,8 +74,7 @@ public class PageParser {
                     }
                 }
                 return imageHLink;
-            case ARTSTATION_COM:
-                //TODO Discovered this website is rendered almost entirely using javascript, gonna investigate using a WebView as a headless browser to render then parse it
+            case TODO_COM:
                 Elements anImage = doc.getElementsByClass("image");
                 Log.d(TAG, anImage.toString());
                 return "";

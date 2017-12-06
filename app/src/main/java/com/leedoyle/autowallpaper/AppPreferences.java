@@ -9,6 +9,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -57,13 +58,21 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Intent i = new Intent(getActivity(), AlarmReceiver.class);
+
         if(serviceEnabled(sharedPreferences)) {
+            Log.d(TAG, "Service enabled, setting up alarm");
             i.setAction(AlarmReceiver.SETUP);
-        } else if (key.equals("service_toggle_key")){
-            Log.d(TAG, "Service disabled, cancelling all alarms");
+        }  else if (key.equals("service_toggle_key")){
+            Log.d(TAG, "Service disabled, cancelling all alarms indefinitely");
             i.setAction(AlarmReceiver.CANCEL);
         }
+
         getActivity().sendBroadcast(i);
+    }
+
+    private void updateSummary(EditTextPreference preference) {
+        // set the EditTextPreference's summary value to its current text
+        preference.setSummary(preference.getText());
     }
 
     @Override

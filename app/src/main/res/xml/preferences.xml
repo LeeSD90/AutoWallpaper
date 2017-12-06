@@ -36,6 +36,10 @@
             android:dialogTitle="@string/source_setting"
             android:entries="@array/source_array"
             android:entryValues="@array/source_array_values"/>
+        <EditTextPreference
+            android:key="search_key"
+            android:title="@string/search_string"
+            android:summary="Enter a google images search string"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/network_category"

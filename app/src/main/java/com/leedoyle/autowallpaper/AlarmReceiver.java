@@ -29,16 +29,18 @@ public class AlarmReceiver extends BroadcastReceiver {
             case "android.intent.action.BOOT_COMPLETED":
                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
                 if(!pref.getBoolean("service_toggle_key", false)){ Log.d(TAG, "Service disabled, doing nothing"); break; } //If the service is disabled on boot
-                Long interval = Long.valueOf(pref.getString("interval_key", ""));
 
+                alarm.cancel(pI); //Cancel existing alarms
+
+                Long interval = Long.valueOf(pref.getString("interval_key", ""));
                 long initialTime = System.currentTimeMillis();
                 alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTime, interval, pI);
-                //if(intent.getStringExtra("key").equals("service_toggle_key")) Toast.makeText(context, "Service enabled", Toast.LENGTH_SHORT).show(); //Provide feedback if the enable button was toggled
+                Toast.makeText(context, "AutoWallpaper service enabled", Toast.LENGTH_SHORT).show();
                 break;
             case CANCEL:
                 try{
                     alarm.cancel(pI);
-                    Toast.makeText(context, "Service disabled", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Autowallpaper service disabled", Toast.LENGTH_SHORT).show();
                 }
                 catch(Exception e){
                     Log.e(TAG, "Alarms not cancelled, perhaps none were set?");
