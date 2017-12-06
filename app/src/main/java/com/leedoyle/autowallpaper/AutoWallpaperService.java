@@ -25,7 +25,17 @@ public class AutoWallpaperService extends IntentService {
 
         if(CheckConnectionStatus(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()))){
             Log.d(TAG, "Getting new wallpaper");
-            setRandomWallpaper(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("source_key", ""));
+            String siteString;
+            String searchString = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("search_key", "NULL");
+            searchString = searchString.replaceAll(" ", "+");
+            if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("source_key", "NULL").equals("Google Images")) {
+                siteString = "https://www.google.com/search?tbm=isch&q=" + searchString ;
+                Log.d(TAG, siteString);
+            }
+            else {
+                siteString = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("source_key", "");
+            }
+            setRandomWallpaper(siteString);
         } else Log.d(TAG, "No suitable connection is available to download over");
     }
 

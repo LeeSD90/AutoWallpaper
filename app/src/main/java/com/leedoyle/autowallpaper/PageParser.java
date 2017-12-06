@@ -3,22 +3,28 @@ package com.leedoyle.autowallpaper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.webkit.WebView;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.jsoup.nodes.Document;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 //TODO Class to form URLs so the user can select filters etc. per site?
 public class PageParser {
 
     private static final String TAG = "PageParser";
     private static final String ANDROIDWALLPAPE_RS = "http://androidwallpape.rs/";
-    private static final String TODO_COM = "https://www.TODO.com/";
+    private static final String GOOGLE = "https://www.google.com";
     private Bitmap image;
 
     private void setImage(Bitmap image){
@@ -53,6 +59,8 @@ public class PageParser {
 
     private String parsePage(String site, Document doc){
         String imageHLink = "";
+        String imageSearch = site;
+        if(site.substring(0, GOOGLE.length()).equals(GOOGLE)){ site = GOOGLE ;}
         switch(site) {
             case ANDROIDWALLPAPE_RS:
                 int upperLimit;
@@ -74,10 +82,37 @@ public class PageParser {
                     }
                 }
                 return imageHLink;
-            case TODO_COM:
-                Elements anImage = doc.getElementsByClass("image");
-                Log.d(TAG, anImage.toString());
-                return "";
+            case GOOGLE:
+                List<String> resultUrls = new ArrayList<String>();
+                String userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
+                try {
+
+                    doc = Jsoup.connect(imageSearch).userAgent(userAgent).referrer("https://www.google.com/").get();
+
+                    Elements elements = doc.select("div.rg_meta");
+
+                    JSONObject jsonObject;
+                    for (Element element : elements) {
+                        if (element.childNodeSize() > 0) {
+                            jsonObject = (JSONObject) new JSONParser().parse(element.childNode(0).toString());
+                            resultUrls.add((String) jsonObject.get("ou"));
+                        }
+                    }
+
+                    System.out.println("number of results: " + resultUrls.size());
+                    Log.d(TAG, resultUrls.get(0));
+                    r = new Random();
+                    seed = r.nextInt((resultUrls.size() - 1) + 1) + 1;          //Generate random number for wallpaper to pick
+                    imageHLink = resultUrls.get(seed);
+
+                    for (String imageUrl : resultUrls) {
+                        System.out.println(imageUrl);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return imageHLink;
             default:
                 return "";
         }
