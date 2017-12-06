@@ -35,12 +35,12 @@ public class AlarmReceiver extends BroadcastReceiver {
                 Long interval = Long.valueOf(pref.getString("interval_key", ""));
                 long initialTime = System.currentTimeMillis();
                 alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, initialTime, interval, pI);
-                Toast.makeText(context, "AutoWallpaper service enabled", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "AutoWallpaper service enabled", Toast.LENGTH_SHORT).show();
                 break;
             case CANCEL:
                 try{
                     alarm.cancel(pI);
-                    Toast.makeText(context, "Autowallpaper service disabled", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Autowallpaper service disabled", Toast.LENGTH_SHORT).show();
                 }
                 catch(Exception e){
                     Log.e(TAG, "Alarms not cancelled, perhaps none were set?");

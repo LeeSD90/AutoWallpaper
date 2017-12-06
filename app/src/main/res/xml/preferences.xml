@@ -39,7 +39,8 @@
         <EditTextPreference
             android:key="search_key"
             android:title="@string/search_string"
-            android:summary="Enter a google images search string"/>
+            android:enabled="false"
+            android:summary="Enter a google images search term"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/network_category"
