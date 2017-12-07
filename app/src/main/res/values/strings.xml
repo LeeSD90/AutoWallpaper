@@ -2,13 +2,14 @@
     <string name="app_name">Auto Wallpaper</string>
 
     <string name="action_settings">Settings</string>
-    <string name="settings_category">General Settings</string>
+    <string name="settings_category">Wallpaper Source Settings</string>
     <string name="interval_setting">Refresh interval</string>
     <string name="interval_setting_default">60000</string>
     <string name="source_setting">Source website</string>
     <string name="source_setting_default">http://androidwallpape.rs/</string>
     <string name="wallpaper_button">New wallpaper</string>
-    <string name="search_string">Search String</string>
+    <string name="search_string">Search term</string>
+    <string name="url_search_string">Website to search</string>
     <string name="service_toggle">Enabled</string>
     <string name="wifi_only_setting">WiFi only</string>
     <string name="data_allowed_setting">Roaming</string>

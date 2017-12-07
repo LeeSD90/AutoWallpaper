@@ -37,6 +37,11 @@
             android:entries="@array/source_array"
             android:entryValues="@array/source_array_values"/>
         <EditTextPreference
+            android:key="url_search_key"
+            android:title="@string/url_search_string"
+            android:enabled="false"
+            android:summary="Enter a specific website URL to search within (Optional)"/>
+        <EditTextPreference
             android:key="search_key"
             android:title="@string/search_string"
             android:enabled="false"

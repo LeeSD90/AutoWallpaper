@@ -6,18 +6,15 @@ import android.util.Log;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.jsoup.nodes.Document;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 //TODO Class to form URLs so the user can select filters etc. per site?
 public class PageParser {
@@ -108,6 +105,8 @@ public class PageParser {
                     for (String imageUrl : resultUrls) {
                         System.out.println(imageUrl);
                     }
+
+                    Log.d(TAG, "Selected URL " + seed + " - " + imageHLink);
 
                 } catch (Exception e) {
                     e.printStackTrace();

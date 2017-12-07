@@ -14,7 +14,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
@@ -23,19 +22,19 @@ import java.util.Random;
 
 public class AppPreferences extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener{
     private final static String TAG = "AutoWallpaper";
-    Preference wifiToggle, dataToggle, wallpaperButton, saveButton, searchBox;
+    Preference wifiToggle, dataToggle, wallpaperButton, saveButton, searchBox, siteSearchBox;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-
         wifiToggle = findPreference("wifi_only_key");
         dataToggle = findPreference("data_allowed_key");
         wallpaperButton = findPreference("wallpaper_button_key");
         saveButton = findPreference("save_button_key");
         searchBox = findPreference("search_key");
+        siteSearchBox = findPreference("search_key");
 
         updateUI();
 
@@ -103,9 +102,10 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
     private void updateUI(){
         SharedPreferences sp = getPreferenceScreen().getSharedPreferences();
         searchBox.setEnabled(sp.getString("source_key", "NULL").equals("Google Images"));
+        siteSearchBox.setEnabled(sp.getString("source_key", "NULL").equals("Google Images"));
+
         EditTextPreference etp = (EditTextPreference) searchBox;
         searchBox.setSummary(etp.getText());
-
     }
 
     //TODO Maybe prevent duplicates by assigning the name based on the image saved, rather than randomly assigning it?
