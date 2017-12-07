@@ -34,7 +34,7 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
         wallpaperButton = findPreference("wallpaper_button_key");
         saveButton = findPreference("save_button_key");
         searchBox = findPreference("search_key");
-        siteSearchBox = findPreference("search_key");
+        siteSearchBox = findPreference("url_search_key");
 
         updateUI();
 
