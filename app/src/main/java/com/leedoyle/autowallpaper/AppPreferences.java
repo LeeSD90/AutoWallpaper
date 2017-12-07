@@ -14,6 +14,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import java.io.File;
@@ -71,8 +72,26 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
             i.setAction(AlarmReceiver.CANCEL);
         }
 
+        if(!checkURL()){
+            Toast.makeText(getActivity().getApplicationContext(), "Malformed URL entered, please enter a valid URL!", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Malformed URL entered!");
+        }
+
         updateUI();
         getActivity().sendBroadcast(i);
+    }
+
+    private boolean checkURL(){
+        SharedPreferences sp = getPreferenceScreen().getSharedPreferences();
+        String urlString = "http://" + sp.getString("url_search_key", "NULL");
+        Log.d(TAG, urlString);
+        if(URLUtil.isHttpUrl(urlString)){
+            return true;
+        }
+        else{
+            siteSearchBox.setSummary("Enter a website URL to search within through Google");
+            return false;
+        }
     }
 
     @Override
@@ -106,6 +125,10 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
 
         EditTextPreference etp = (EditTextPreference) searchBox;
         searchBox.setSummary(etp.getText());
+
+        etp = (EditTextPreference) siteSearchBox;
+        siteSearchBox.setSummary(etp.getText());
+
     }
 
     //TODO Maybe prevent duplicates by assigning the name based on the image saved, rather than randomly assigning it?
