@@ -19,7 +19,8 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class AppPreferences extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener{
     private final static String TAG = "AutoWallpaper";
@@ -131,18 +132,16 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
 
     }
 
-    //TODO Maybe prevent duplicates by assigning the name based on the image saved, rather than randomly assigning it?
     private void saveWallpaper() throws Exception{
         Bitmap wallpaper = ((BitmapDrawable)WallpaperManager.getInstance(getActivity()).getDrawable()).getBitmap();
 
         String dirRoot = Environment.getExternalStorageDirectory().toString();
         File wallpaperDir = new File(dirRoot + "/wallpapers");
         wallpaperDir.mkdirs();
-        Random ran = new Random();
-        int n = ran.nextInt(90000);
-        String fileName = "Image_" + n + ".jpg";
+        String n = new SimpleDateFormat("ddMMyy_HHmmss").format(Calendar.getInstance().getTime()); // Gets the date & time to use as a name for the file
+        String fileName = "wallpaper_" + n + ".jpg";
         File file = new File(wallpaperDir, fileName);
-        while(file.exists()) file = new File(wallpaperDir, "Image_" + ran.nextInt(90000) + ".jpg");
+        //while(file.exists()) file = new File(wallpaperDir, "Image_" + ran.nextInt(90000) + ".jpg");
         FileOutputStream fos = new FileOutputStream(file);
         try{
             wallpaper.compress(Bitmap.CompressFormat.JPEG, 90, fos);
@@ -152,7 +151,7 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
                     Log.i(TAG, "Scan completed.");
                 }
             });
-            Toast.makeText(getActivity().getApplicationContext(), "Wallpaper saved!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Wallpaper saved as " + fileName, Toast.LENGTH_SHORT).show();
         }
         catch(Exception e){
             e.printStackTrace();
