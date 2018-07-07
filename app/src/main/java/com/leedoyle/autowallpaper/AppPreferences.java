@@ -24,7 +24,7 @@ import java.util.Calendar;
 
 public class AppPreferences extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener{
     private final static String TAG = "AutoWallpaper";
-    Preference wifiToggle, dataToggle, wallpaperButton, saveButton, searchBox, siteSearchBox;
+    Preference wifiToggle, dataToggle, wallpaperButton, saveButton, searchBox, siteSearchBox, preview;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -129,7 +129,6 @@ public class AppPreferences extends PreferenceFragment implements SharedPreferen
 
         etp = (EditTextPreference) siteSearchBox;
         siteSearchBox.setSummary(etp.getText());
-
     }
 
     private void saveWallpaper() throws Exception{
