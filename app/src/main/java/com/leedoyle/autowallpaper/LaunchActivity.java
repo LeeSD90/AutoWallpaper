@@ -8,7 +8,6 @@ import android.os.Bundle;
 //TODO Add lockscreen auto changer?
 //TODO Maybe write something to log the details of wallpaper changes to help debugging
 //TODO Test the data roaming settings
-//TODO More source sites!
 
 public class LaunchActivity extends AppCompatActivity {
 

@@ -37,15 +37,15 @@
             android:entries="@array/source_array"
             android:entryValues="@array/source_array_values"/>
         <EditTextPreference
-            android:key="url_search_key"
-            android:title="@string/url_search_string"
-            android:enabled="false"
-            android:summary="Enter a website URL to search within through Google"/>
-        <EditTextPreference
             android:key="search_key"
             android:title="@string/search_string"
             android:enabled="false"
             android:summary="Enter a google images search term"/>
+        <EditTextPreference
+            android:enabled="false"
+            android:key="url_search_key"
+            android:summary="Enter a website URL to search within through Google"
+            android:title="@string/url_search_string" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/network_category"

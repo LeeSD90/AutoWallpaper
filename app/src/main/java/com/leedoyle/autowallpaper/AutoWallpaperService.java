@@ -29,7 +29,7 @@ public class AutoWallpaperService extends IntentService {
             String searchString = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("search_key", "NULL");
             searchString = searchString.replaceAll(" ", "+");
             if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("source_key", "NULL").equals("Google Images")) {
-                siteString = "https://www.google.com/search?tbm=isch&tbs=iar:t,isz:lt,islt:xga&q=" + searchString ;
+                siteString = "https://www.google.com/search?tbm=isch&tbs=iar:t,isz:lt,islt:xga&q=" + searchString + " wallpaper" ;
                 Log.d(TAG, siteString);
             }
             else {
