@@ -1,37 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
-
+    <item android:title="System">
+        <menu>
+            <item
+                android:id="@+id/nav_enabled"
+                android:icon="@android:drawable/ic_lock_power_off"
+                android:title="Service Enabled"
+                app:actionLayout="@layout/switch_item"
+                app:showAsAction="always" />
+                android:title="Service Enabled" />
+            <item
+                android:id="@+id/nav_new_wall"
+                android:icon="@android:drawable/ic_menu_rotate"
+                android:title="New Wallpaper" />
+            <item
+                android:id="@+id/nav_save_wall"
+                android:icon="@android:drawable/ic_menu_save"
+                android:title="Save Current Wallpaper" />
+        </menu>
+    </item>
+    <item android:title="Refresh Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_refresh"
+                android:icon="@android:drawable/ic_lock_idle_alarm"
+                android:title="Refresh Interval" />
+            <item
+                android:id="@+id/nav_search"
+                android:icon="@android:drawable/ic_menu_search"
+                android:title="Search Term" />
+        </menu>
+    </item>
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_wifi"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Wifi Only" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_roaming"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Roaming" />
         </menu>
     </item>
 
