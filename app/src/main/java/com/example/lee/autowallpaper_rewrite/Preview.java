@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class Preview extends AppCompatActivity
@@ -26,11 +27,6 @@ public class Preview extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ImageView wallpaperPreviewArea = (ImageView) findViewById(R.id.previewImageView);
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-        Drawable wallpaper = wallpaperManager.getDrawable();
-        wallpaperPreviewArea.setImageDrawable(wallpaper);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -39,6 +35,19 @@ public class Preview extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Set up the wallpaper preview
+        ImageView wallpaperPreviewArea = (ImageView) findViewById(R.id.previewImageView);
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
+        Drawable wallpaper = wallpaperManager.getDrawable();
+        wallpaperPreviewArea.setImageDrawable(wallpaper);
+
+        Button newWallpaper = (Button) findViewById(R.id.newWallpaper);
+        newWallpaper.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                // get new wallpaper
+            }
+        });
     }
 
     @Override
