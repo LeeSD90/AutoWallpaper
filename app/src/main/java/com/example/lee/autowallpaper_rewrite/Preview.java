@@ -36,11 +36,7 @@ public class Preview extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Set up the wallpaper preview
-        ImageView wallpaperPreviewArea = (ImageView) findViewById(R.id.previewImageView);
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-        Drawable wallpaper = wallpaperManager.getDrawable();
-        wallpaperPreviewArea.setImageDrawable(wallpaper);
+        setPreview();
 
         Button newWallpaper = (Button) findViewById(R.id.newWallpaper);
         newWallpaper.setOnClickListener(new View.OnClickListener() {
@@ -101,5 +97,13 @@ public class Preview extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // Set up the wallpaper preview
+    private void setPreview() {
+        ImageView wallpaperPreviewArea = (ImageView) findViewById(R.id.previewImageView);
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
+        Drawable wallpaper = wallpaperManager.getDrawable();
+        wallpaperPreviewArea.setImageDrawable(wallpaper);
     }
 }
