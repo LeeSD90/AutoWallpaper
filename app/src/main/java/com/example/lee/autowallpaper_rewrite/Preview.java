@@ -38,7 +38,7 @@ public class Preview extends AppCompatActivity
         Button newWallpaper = (Button) findViewById(R.id.newWallpaper);
         newWallpaper.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                ImageParser.getWallpaper("https://www.google.no/search?q=puppies&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW3tSZpZLcAhXDBZoKHcggB10Q_AUICigB&biw=2560&bih=1307");
+                WallpaperManager.getInstance(this).setBitmap(ImageParser.getWallpaper("https://www.google.no/search?q=puppies&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW3tSZpZLcAhXDBZoKHcggB10Q_AUICigB&biw=2560&bih=1307"));
             }
         });
     }

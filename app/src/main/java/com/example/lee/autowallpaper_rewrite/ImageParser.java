@@ -27,6 +27,7 @@ public final class ImageParser {
 
     }
 
+    // Accepts a google image search URL and returns a random image
     public static Bitmap getWallpaper(final String searchURL) {
         Thread t = new Thread(searchURL){
             String imageURL;
