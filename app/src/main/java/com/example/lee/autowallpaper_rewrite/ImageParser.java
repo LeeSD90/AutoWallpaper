@@ -35,8 +35,8 @@ public final class ImageParser {
             @Override
             public void run(){
                 try{
-                    imageURL = selectImage(searchURL);                    //Get the hyperlink of a randomly selected wallpaper from the page
-                    image = (getBitmapFromURL(imageURL));           //Download the image to a bitmap
+                    imageURL = selectImage(searchURL);                    // Get the hyperlink of a randomly selected wallpaper from the page
+                    image = (getBitmapFromURL(imageURL));           // Download the image to a bitmap
                 } catch(Exception e){
                     Log.d(TAG, "Something bad happened");
                     e.printStackTrace();
@@ -75,7 +75,7 @@ public final class ImageParser {
             System.out.println("number of results: " + resultUrls.size());
             Log.d(TAG, resultUrls.get(0));
             Random r = new Random();
-            int seed = r.nextInt((resultUrls.size() - 1) + 1) + 1;          //Generate random number for wallpaper to pick
+            int seed = r.nextInt((resultUrls.size() - 1) + 1) + 1;          // Generate random number for wallpaper to pick
             imageURL = resultUrls.get(seed);
 
             for (String imageUrl : resultUrls) {
@@ -90,7 +90,8 @@ public final class ImageParser {
         return imageURL;
     }
 
-    private static Bitmap getBitmapFromURL(String url){       //Gets a bitmap from an image url
+    // Gets a bitmap from an image url
+    private static Bitmap getBitmapFromURL(String url){
         Bitmap image;
         try {
             URL newUrl = new URL(url);
