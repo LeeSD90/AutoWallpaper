@@ -1,9 +1,11 @@
 package com.example.lee.autowallpaper_rewrite;
 
+import android.app.AlertDialog;
 import android.app.WallpaperManager;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,12 +40,9 @@ public class Preview extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         // Populate the search text in the nav drawer
-        Menu menu = navigationView.getMenu();
-        MenuItem item = menu.findItem(R.id.nav_search);
-        View subView = item.getActionView();
-        TextView searchString = (TextView) subView.findViewById(R.id.searchStringView);
-        searchString.setText("puppy");
+        setSearchString("puppy");
 
+        // Set up the wallpaper preview
         setPreview();
 
         Button newWallpaper = (Button) findViewById(R.id.newWallpaper);
@@ -100,6 +100,7 @@ public class Preview extends AppCompatActivity
             case R.id.nav_refresh:
                 break;
             case R.id.nav_search:
+                inputSearchString();
                 break;
             case R.id.nav_wifi:
                 break;
@@ -110,6 +111,51 @@ public class Preview extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void inputSearchString(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Search Term");
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setText(getSearchString());
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Set the text
+                setSearchString(input.getText().toString());
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Reset the text
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void setSearchString(String text){
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        MenuItem item = menu.findItem(R.id.nav_search);
+        View subView = item.getActionView();
+        TextView searchString = (TextView) subView.findViewById(R.id.searchStringView);
+        searchString.setText(text);
+    }
+
+    private String getSearchString(){
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        MenuItem item = menu.findItem(R.id.nav_search);
+        View subView = item.getActionView();
+        TextView searchString = (TextView) subView.findViewById(R.id.searchStringView);
+        return searchString.getText().toString();
     }
 
     // Set up the wallpaper preview
