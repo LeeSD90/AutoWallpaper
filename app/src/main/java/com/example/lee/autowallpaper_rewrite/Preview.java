@@ -3,6 +3,8 @@ package com.example.lee.autowallpaper_rewrite;
 import android.app.WallpaperManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,12 +36,25 @@ public class Preview extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Populate the search text in the nav drawer
+        Menu menu = navigationView.getMenu();
+        MenuItem item = menu.findItem(R.id.nav_search);
+        View subView = item.getActionView();
+        TextView searchString = (TextView) subView.findViewById(R.id.searchStringView);
+        searchString.setText("puppy");
+
         setPreview();
 
         Button newWallpaper = (Button) findViewById(R.id.newWallpaper);
         newWallpaper.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                WallpaperManager.getInstance(this).setBitmap(ImageParser.getWallpaper("https://www.google.no/search?q=puppies&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW3tSZpZLcAhXDBZoKHcggB10Q_AUICigB&biw=2560&bih=1307"));
+                try {
+                    WallpaperManager.getInstance(v.getContext()).setBitmap(ImageParser.getWallpaper("https://www.google.no/search?q=puppies&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW3tSZpZLcAhXDBZoKHcggB10Q_AUICigB&biw=2560&bih=1307"));
+                    setPreview();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         });
     }
