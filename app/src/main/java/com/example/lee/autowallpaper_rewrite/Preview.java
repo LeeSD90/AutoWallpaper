@@ -103,8 +103,6 @@ public class Preview extends AppCompatActivity
                 break;
             case R.id.menu_save_wall:
                 break;
-            case R.id.menu_refresh:
-                break;
             case R.id.menu_search:
                 inputSearchString();
                 break;

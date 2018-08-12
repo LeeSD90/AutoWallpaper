@@ -9,7 +9,6 @@
     <string name="menu_interval">Refresh</string>
     <string name="menu_new_wall">New Wallpaper</string>
     <string name="menu_save_wall">Save Current Wallpaper</string>
-    <string name="menu_refresh">Refresh Interval</string>
     <string name="menu_search">Search Term</string>
     <string name="menu_wifi">Wifi Only</string>
     <string name="menu_roaming">Roaming</string>

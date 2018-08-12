@@ -6,11 +6,6 @@
     <item android:title="System">
         <menu>
             <item
-                android:id="@+id/menu_interval"
-                android:icon="@android:drawable/ic_lock_power_off"
-                android:title="@string/menu_interval"
-                app:actionLayout="@layout/spinner"/>
-            <item
                 android:id="@+id/menu_new_wall"
                 android:icon="@android:drawable/ic_menu_rotate"
                 android:title="@string/menu_new_wall" />
@@ -23,9 +18,10 @@
     <item android:title="Refresh Settings">
         <menu>
             <item
-                android:id="@+id/menu_refresh"
+                android:id="@+id/menu_interval"
                 android:icon="@android:drawable/ic_lock_idle_alarm"
-                android:title="@string/menu_refresh" />
+                android:title="@string/menu_interval"
+                app:actionLayout="@layout/spinner" />
             <item
                 android:id="@+id/menu_search"
                 android:icon="@android:drawable/ic_menu_search"
