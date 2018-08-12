@@ -15,9 +15,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Preview extends AppCompatActivity
@@ -39,6 +41,13 @@ public class Preview extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Interval spinner set up
+        Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.menu_interval).getActionView();
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.intervals, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        // TODO add persistence
         // Populate the search text in the nav drawer
         setSearchString("puppy");
 
@@ -91,7 +100,7 @@ public class Preview extends AppCompatActivity
         int id = item.getItemId();
 
         switch(id){
-            case R.id.nav_enabled:
+            case R.id.menu_interval:
                 break;
             case R.id.nav_new_wall:
                 break;

@@ -6,11 +6,10 @@
     <item android:title="System">
         <menu>
             <item
-                android:id="@+id/nav_enabled"
+                android:id="@+id/menu_interval"
                 android:icon="@android:drawable/ic_lock_power_off"
-                android:title="Service Enabled"
-                app:actionLayout="@layout/switch_item"
-                app:showAsAction="always" />
+                android:title="@string/menu_interval"
+                app:actionLayout="@layout/spinner"/>
             <item
                 android:id="@+id/nav_new_wall"
                 android:icon="@android:drawable/ic_menu_rotate"
