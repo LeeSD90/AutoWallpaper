@@ -102,18 +102,18 @@ public class Preview extends AppCompatActivity
         switch(id){
             case R.id.menu_interval:
                 break;
-            case R.id.nav_new_wall:
+            case R.id.menu_new_wall:
                 break;
-            case R.id.nav_save_wall:
+            case R.id.menu_save_wall:
                 break;
-            case R.id.nav_refresh:
+            case R.id.menu_refresh:
                 break;
-            case R.id.nav_search:
+            case R.id.menu_search:
                 inputSearchString();
                 break;
-            case R.id.nav_wifi:
+            case R.id.menu_wifi:
                 break;
-            case R.id.nav_roaming:
+            case R.id.menu_roaming:
                 break;
         }
 
@@ -153,7 +153,7 @@ public class Preview extends AppCompatActivity
     private void setSearchString(String text){
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
-        MenuItem item = menu.findItem(R.id.nav_search);
+        MenuItem item = menu.findItem(R.id.menu_search);
         View subView = item.getActionView();
         TextView searchString = (TextView) subView.findViewById(R.id.searchStringView);
         searchString.setText(text);
@@ -162,7 +162,7 @@ public class Preview extends AppCompatActivity
     private String getSearchString(){
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
-        MenuItem item = menu.findItem(R.id.nav_search);
+        MenuItem item = menu.findItem(R.id.menu_search);
         View subView = item.getActionView();
         TextView searchString = (TextView) subView.findViewById(R.id.searchStringView);
         return searchString.getText().toString();

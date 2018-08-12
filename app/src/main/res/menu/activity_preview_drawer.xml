@@ -11,38 +11,38 @@
                 android:title="@string/menu_interval"
                 app:actionLayout="@layout/spinner"/>
             <item
-                android:id="@+id/nav_new_wall"
+                android:id="@+id/menu_new_wall"
                 android:icon="@android:drawable/ic_menu_rotate"
-                android:title="New Wallpaper" />
+                android:title="@string/menu_new_wall" />
             <item
-                android:id="@+id/nav_save_wall"
+                android:id="@+id/menu_save_wall"
                 android:icon="@android:drawable/ic_menu_save"
-                android:title="Save Current Wallpaper" />
+                android:title="@string/menu_save_wall" />
         </menu>
     </item>
     <item android:title="Refresh Settings">
         <menu>
             <item
-                android:id="@+id/nav_refresh"
+                android:id="@+id/menu_refresh"
                 android:icon="@android:drawable/ic_lock_idle_alarm"
-                android:title="Refresh Interval" />
+                android:title="@string/menu_refresh" />
             <item
-                android:id="@+id/nav_search"
+                android:id="@+id/menu_search"
                 android:icon="@android:drawable/ic_menu_search"
-                app:actionLayout="@layout/text_input_item"
-                android:title="Search Term" />
+                android:title="@string/menu_search"
+                app:actionLayout="@layout/text_input_item" />
         </menu>
     </item>
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_wifi"
+                android:id="@+id/menu_wifi"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Wifi Only" />
+                android:title="@string/menu_wifi" />
             <item
-                android:id="@+id/nav_roaming"
+                android:id="@+id/menu_roaming"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Roaming" />
+                android:title="@string/menu_roaming" />
         </menu>
     </item>
 
