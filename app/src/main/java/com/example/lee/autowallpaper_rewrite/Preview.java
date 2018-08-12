@@ -49,7 +49,7 @@ public class Preview extends AppCompatActivity
         newWallpaper.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 try {
-                    WallpaperManager.getInstance(v.getContext()).setBitmap(ImageParser.getWallpaper("https://www.google.no/search?q=puppies&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW3tSZpZLcAhXDBZoKHcggB10Q_AUICigB&biw=2560&bih=1307"));
+                    WallpaperManager.getInstance(v.getContext()).setBitmap(ImageParser.getWallpaper("https://www.google.no/search?q=" + getSearchString() + "&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW3tSZpZLcAhXDBZoKHcggB10Q_AUICigB&biw=2560&bih=1307"));
                     setPreview();
                 }
                 catch(Exception e){
@@ -113,6 +113,7 @@ public class Preview extends AppCompatActivity
         return true;
     }
 
+    // Provide dialog for user to set the search string
     private void inputSearchString(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Search Term");
