@@ -2,6 +2,7 @@ package com.example.lee.autowallpaper_rewrite;
 
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -54,16 +55,11 @@ public class Preview extends AppCompatActivity
         // Set up the wallpaper preview
         setPreview();
 
+        // New Wallpaper interface button
         Button newWallpaper = (Button) findViewById(R.id.newWallpaper);
         newWallpaper.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                try {
-                    WallpaperManager.getInstance(v.getContext()).setBitmap(ImageParser.getWallpaper("https://www.google.no/search?q=" + getSearchString() + "&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW3tSZpZLcAhXDBZoKHcggB10Q_AUICigB&biw=2560&bih=1307"));
-                    setPreview();
-                }
-                catch(Exception e){
-                    e.printStackTrace();
-                }
+                getNewWallpaper();
             }
         });
     }
@@ -103,6 +99,7 @@ public class Preview extends AppCompatActivity
             case R.id.menu_interval:
                 break;
             case R.id.menu_new_wall:
+                getNewWallpaper();
                 break;
             case R.id.menu_save_wall:
                 break;
@@ -120,6 +117,17 @@ public class Preview extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // Get a new wallpaper with the given settings
+    private void getNewWallpaper() {
+        try{
+            WallpaperManager.getInstance(getApplicationContext()).setBitmap(ImageParser.getWallpaper("https://www.google.no/search?q=" + getSearchString() + "&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW3tSZpZLcAhXDBZoKHcggB10Q_AUICigB&biw=2560&bih=1307"));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        setPreview();
     }
 
     // Provide dialog for user to set the search string
