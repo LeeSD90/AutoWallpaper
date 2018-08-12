@@ -30,16 +30,16 @@ public class Preview extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Interval spinner set up
@@ -56,7 +56,7 @@ public class Preview extends AppCompatActivity
         setPreview();
 
         // New Wallpaper interface button
-        Button newWallpaper = (Button) findViewById(R.id.newWallpaper);
+        Button newWallpaper = findViewById(R.id.newWallpaper);
         newWallpaper.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 getNewWallpaper();
@@ -66,7 +66,7 @@ public class Preview extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -112,7 +112,7 @@ public class Preview extends AppCompatActivity
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -157,26 +157,26 @@ public class Preview extends AppCompatActivity
     }
 
     private void setSearchString(String text){
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         MenuItem item = menu.findItem(R.id.menu_search);
         View subView = item.getActionView();
-        TextView searchString = (TextView) subView.findViewById(R.id.searchStringView);
+        TextView searchString = subView.findViewById(R.id.searchStringView);
         searchString.setText(text);
     }
 
     private String getSearchString(){
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         MenuItem item = menu.findItem(R.id.menu_search);
         View subView = item.getActionView();
-        TextView searchString = (TextView) subView.findViewById(R.id.searchStringView);
+        TextView searchString = subView.findViewById(R.id.searchStringView);
         return searchString.getText().toString();
     }
 
     // Set up the wallpaper preview
     private void setPreview() {
-        ImageView wallpaperPreviewArea = (ImageView) findViewById(R.id.previewImageView);
+        ImageView wallpaperPreviewArea = findViewById(R.id.previewImageView);
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
         Drawable wallpaper = wallpaperManager.getDrawable();
         wallpaperPreviewArea.setImageDrawable(wallpaper);
