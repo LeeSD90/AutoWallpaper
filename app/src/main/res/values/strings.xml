@@ -6,6 +6,11 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string name="menu_system">System settings</string>
+    <string name="menu_refresh">Refresh settings</string>
+    <string name="menu_network">Network settings</string>
+
     <string name="menu_interval">Refresh</string>
     <string name="menu_new_wall">New Wallpaper</string>
     <string name="menu_save_wall">Save Current Wallpaper</string>
