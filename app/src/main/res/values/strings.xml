@@ -18,12 +18,25 @@
     <string name="menu_wifi">Wifi Only</string>
     <string name="menu_roaming">Roaming</string>
 
-    <string-array name="intervals">
+    <string-array name="interval_array">
         <item>Never</item>
+        <item>1 minute</item>
+        <item>10 minutes</item>
         <item>30 minutes</item>
+        <item>1 hour</item>
         <item>3 hours</item>
         <item>6 hours</item>
-        <item>12 hours</item>
-        <item>1 day</item>
+        <item>Daily</item>
     </string-array>
+    <string-array name="interval_array_values">
+        <item>0</item>
+        <item>60000</item>
+        <item>600000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>10800000</item>
+        <item>21600000</item>
+        <item>86400000</item>
+    </string-array>
+
 </resources>

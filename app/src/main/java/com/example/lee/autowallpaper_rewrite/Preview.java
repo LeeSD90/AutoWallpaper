@@ -44,7 +44,7 @@ public class Preview extends AppCompatActivity
 
         // Interval spinner set up
         Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.menu_interval).getActionView();
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.intervals, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.interval_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
