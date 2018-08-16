@@ -11,7 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class RefreshTimerService extends Service {
-    private int interval = 10 * 1000;
+    private int interval;
 
     private Handler handler = new Handler();
 
@@ -19,9 +19,16 @@ public class RefreshTimerService extends Service {
 
     @Override
     public int onStartCommand (Intent intent, int flags, int startId) {
+        timer.cancel();
+        timer = new Timer();
         interval = (int) intent.getExtras().get("interval");
-        Log.d("CHECKINGASDLMASD", Integer.toString(interval));
-        return START_STICKY_COMPATIBILITY;
+
+        // TODO move this check?
+        if (interval != 0) {
+            timer.scheduleAtFixedRate(new refreshTimer(), 0, interval);
+        }
+
+        return START_STICKY;
     }
 
     @Override
@@ -31,18 +38,15 @@ public class RefreshTimerService extends Service {
 
     @Override
     public void onCreate() {
-
         // Cancel existing timer
         if(timer != null){
             timer.cancel();
         } else {
             timer = new Timer();
         }
-
-        timer.scheduleAtFixedRate(new Refresher(), 0, interval);
     }
 
-    class Refresher extends TimerTask {
+    class refreshTimer extends TimerTask {
         @Override
         public void run() {
             handler.post(new Runnable() {
