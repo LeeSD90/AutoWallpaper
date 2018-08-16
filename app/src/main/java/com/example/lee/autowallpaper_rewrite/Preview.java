@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
@@ -82,6 +83,7 @@ public class Preview extends AppCompatActivity
 
         switch(id){
             case R.id.menu_interval:
+                setTimer();
                 break;
             case R.id.menu_new_wall:
                 getNewWallpaper();
@@ -100,6 +102,10 @@ public class Preview extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setTimer() {
+        startService(new Intent(this, RefreshTimerService.class));
     }
 
     // TODO Own thread?
