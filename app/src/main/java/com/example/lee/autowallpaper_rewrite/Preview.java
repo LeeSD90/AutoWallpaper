@@ -2,7 +2,6 @@ package com.example.lee.autowallpaper_rewrite;
 
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -17,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +48,19 @@ public class Preview extends AppCompatActivity
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.interval_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int interval = Integer.parseInt(getResources().getStringArray(R.array.interval_array_values)[i]);
+                setTimer(interval);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         // TODO add persistence
         // Populate the search text in the nav drawer
@@ -82,9 +95,6 @@ public class Preview extends AppCompatActivity
         int id = item.getItemId();
 
         switch(id){
-            case R.id.menu_interval:
-                setTimer();
-                break;
             case R.id.menu_new_wall:
                 getNewWallpaper();
                 break;
@@ -104,8 +114,10 @@ public class Preview extends AppCompatActivity
         return true;
     }
 
-    private void setTimer() {
-        startService(new Intent(this, RefreshTimerService.class));
+    private void setTimer(int interval) {
+        Intent i = new Intent(this, RefreshTimerService.class);
+        i.putExtra("interval", interval);
+        this.startService(i);
     }
 
     // TODO Own thread?

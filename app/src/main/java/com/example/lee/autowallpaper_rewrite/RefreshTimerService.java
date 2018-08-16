@@ -4,19 +4,25 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class RefreshTimerService extends Service {
-    public static final long INTERVAL = 10 * 1000; // 10 Seconds
+    private int interval = 10 * 1000;
 
     private Handler handler = new Handler();
 
     private Timer timer = null;
+
+    @Override
+    public int onStartCommand (Intent intent, int flags, int startId) {
+        interval = (int) intent.getExtras().get("interval");
+        Log.d("CHECKINGASDLMASD", Integer.toString(interval));
+        return START_STICKY_COMPATIBILITY;
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -25,6 +31,7 @@ public class RefreshTimerService extends Service {
 
     @Override
     public void onCreate() {
+
         // Cancel existing timer
         if(timer != null){
             timer.cancel();
@@ -32,7 +39,7 @@ public class RefreshTimerService extends Service {
             timer = new Timer();
         }
 
-        timer.scheduleAtFixedRate(new Refresher(), 0, INTERVAL);
+        timer.scheduleAtFixedRate(new Refresher(), 0, interval);
     }
 
     class Refresher extends TimerTask {
@@ -41,14 +48,10 @@ public class RefreshTimerService extends Service {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(), getDateTime(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), Integer.toString(interval), Toast.LENGTH_SHORT).show();
+                    Log.d("Timer", "Running schedule now...");
                 }
             });
-        }
-
-        private String getDateTime() {
-            SimpleDateFormat sdf = new SimpleDateFormat("[yyyy/MM/dd - HH:mm:ss]");
-            return sdf.format(new Date());
         }
     }
 }
