@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -52,8 +51,7 @@ public class RefreshTimerService extends Service {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(), Integer.toString(interval), Toast.LENGTH_SHORT).show();
-                    Log.d("Timer", "Running schedule now...");
+                    Log.d("Timer", "Running schedule now... " + Integer.toString(interval));
                 }
             });
         }
