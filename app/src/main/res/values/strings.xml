@@ -22,6 +22,7 @@
     <string-array name="interval_array">
         <item>Never</item>
         <item>10 seconds</item>
+        <item>20 seconds</item>
         <item>1 minute</item>
         <item>10 minutes</item>
         <item>30 minutes</item>
@@ -33,6 +34,7 @@
     <string-array name="interval_array_values">
         <item>0</item>
         <item>10000</item>
+        <item>20000</item>
         <item>60000</item>
         <item>600000</item>
         <item>1800000</item>
