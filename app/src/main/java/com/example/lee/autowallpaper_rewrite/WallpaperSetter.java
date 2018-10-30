@@ -3,6 +3,7 @@ package com.example.lee.autowallpaper_rewrite;
 import android.app.WallpaperManager;
 import android.content.Context;
 
+// TODO broadcast receiver?
 public class WallpaperSetter {
 
 
