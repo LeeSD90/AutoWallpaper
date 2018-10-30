@@ -73,7 +73,7 @@ public class Preview extends AppCompatActivity
         Button newWallpaper = findViewById(R.id.newWallpaper);
         newWallpaper.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                getNewWallpaper();
+                updateWallpaper();
             }
         });
     }
@@ -96,7 +96,7 @@ public class Preview extends AppCompatActivity
 
         switch(id){
             case R.id.menu_new_wall:
-                getNewWallpaper();
+                updateWallpaper();
                 break;
             case R.id.menu_save_wall:
                 break;
@@ -114,23 +114,19 @@ public class Preview extends AppCompatActivity
         return true;
     }
 
+    private void updateWallpaper(){
+        if(WallpaperSetter.setNewWallpaper(getApplicationContext(), getSearchString())){
+            setPreview();
+        }
+    }
+
     private void setTimer(int interval) {
         Intent i = new Intent(this, RefreshTimerService.class);
         i.putExtra("interval", interval);
         this.startService(i);
     }
 
-    // TODO Own thread?
-    // Get a new wallpaper with the given settings
-    private void getNewWallpaper() {
-        try{
-            WallpaperManager.getInstance(getApplicationContext()).setBitmap(ImageParser.getWallpaper("https://www.google.no/search?q=" + getSearchString() + "&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiW3tSZpZLcAhXDBZoKHcggB10Q_AUICigB&biw=2560&bih=1307"));
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        setPreview();
-    }
+
 
     // Provide dialog for user to set the search string
     private void inputSearchString(){
