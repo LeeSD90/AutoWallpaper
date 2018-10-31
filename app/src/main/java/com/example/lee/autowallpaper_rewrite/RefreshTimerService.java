@@ -16,6 +16,9 @@ public class RefreshTimerService extends Service {
 
     private Timer timer = null;
 
+    public static final String UPDATE_WALL = "com.example.lee.autowallpaper_rewrite";
+    Intent intent;
+
     @Override
     public int onStartCommand (Intent intent, int flags, int startId) {
         timer.cancel();
@@ -37,12 +40,18 @@ public class RefreshTimerService extends Service {
 
     @Override
     public void onCreate() {
+        intent = new Intent(UPDATE_WALL);
         // Cancel existing timer
         if(timer != null){
             timer.cancel();
         } else {
             timer = new Timer();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        stopService(intent);
     }
 
     class refreshTimer extends TimerTask {
@@ -52,6 +61,7 @@ public class RefreshTimerService extends Service {
                 @Override
                 public void run() {
                     Log.d("Timer", "Running schedule now... " + Integer.toString(interval));
+                    WallpaperSetter.setNewWallpaper(getApplicationContext(), "placeholder");
                 }
             });
         }
