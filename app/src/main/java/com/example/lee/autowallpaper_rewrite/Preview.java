@@ -7,10 +7,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,11 +29,17 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-// TODO remove drawer for settings menu
+// TODO remove drawer for settings menu?
 // TODO repeat failed new wallpaper attempts
+// TODO investigate crashing on app close
+// TODO implement the rest of sharedPrefs
 
 public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    SharedPreferences sharedPreferences;
+    public static final String preferences = "AppPreferences";
+    public static final String Search = "searchKey";
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -46,6 +54,8 @@ public class Preview extends AppCompatActivity
         setContentView(R.layout.activity_preview);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        sharedPreferences = getSharedPreferences(preferences, Context.MODE_PRIVATE);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,12 +85,11 @@ public class Preview extends AppCompatActivity
             }
         });
 
-        // TODO add persistence
-        // Populate the search text in the nav drawer
-        setSearchString("puppy");
-
         // Set up the wallpaper preview
         updatePreview();
+
+        // Get Settings from sharedprefs
+        updateSettings();
 
         // New Wallpaper interface button
         Button newWallpaper = findViewById(R.id.newWallpaper);
@@ -89,6 +98,13 @@ public class Preview extends AppCompatActivity
                 updateWallpaper();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_preview_drawer, menu);
+        return true;
     }
 
     @Override
@@ -176,12 +192,19 @@ public class Preview extends AppCompatActivity
     }
 
     private void setSearchString(String text){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Search, text);
+        editor.commit();
+        updateSettings();
+    }
+
+    private void updateSettings() {
         NavigationView navigationView = findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         MenuItem item = menu.findItem(R.id.menu_search);
         View subView = item.getActionView();
         TextView searchString = subView.findViewById(R.id.searchStringView);
-        searchString.setText(text);
+        searchString.setText(sharedPreferences.getString(Search, "puppies"));
     }
 
     private String getSearchString(){
