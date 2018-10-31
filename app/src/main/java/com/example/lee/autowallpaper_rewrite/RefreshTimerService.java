@@ -54,6 +54,10 @@ public class RefreshTimerService extends Service {
         stopService(intent);
     }
 
+    private void update() {
+        sendBroadcast(intent);
+    }
+
     class refreshTimer extends TimerTask {
         @Override
         public void run() {
@@ -62,6 +66,7 @@ public class RefreshTimerService extends Service {
                 public void run() {
                     Log.d("Timer", "Running schedule now... " + Integer.toString(interval));
                     WallpaperSetter.setNewWallpaper(getApplicationContext(), "placeholder");
+                    update();
                 }
             });
         }

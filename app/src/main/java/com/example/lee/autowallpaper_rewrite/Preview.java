@@ -2,8 +2,11 @@ package com.example.lee.autowallpaper_rewrite;
 
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
@@ -26,6 +29,13 @@ import android.widget.TextView;
 
 public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updatePreview();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +77,7 @@ public class Preview extends AppCompatActivity
         setSearchString("puppy");
 
         // Set up the wallpaper preview
-        setPreview();
+        updatePreview();
 
         // New Wallpaper interface button
         Button newWallpaper = findViewById(R.id.newWallpaper);
@@ -76,6 +86,12 @@ public class Preview extends AppCompatActivity
                 updateWallpaper();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(broadcastReceiver, new IntentFilter(RefreshTimerService.UPDATE_WALL));
     }
 
     @Override
@@ -116,7 +132,7 @@ public class Preview extends AppCompatActivity
 
     private void updateWallpaper(){
         if(WallpaperSetter.setNewWallpaper(getApplicationContext(), getSearchString())){
-            setPreview();
+            updatePreview();
         }
     }
 
@@ -175,7 +191,7 @@ public class Preview extends AppCompatActivity
     }
 
     // Set up the wallpaper preview
-    private void setPreview() {
+    private void updatePreview() {
         ImageView wallpaperPreviewArea = findViewById(R.id.previewImageView);
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
         Drawable wallpaper = wallpaperManager.getDrawable();

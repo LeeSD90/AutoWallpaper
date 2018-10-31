@@ -6,7 +6,6 @@ import android.content.Context;
 // TODO broadcast receiver?
 public class WallpaperSetter {
 
-
     private WallpaperSetter(){
 
     }
