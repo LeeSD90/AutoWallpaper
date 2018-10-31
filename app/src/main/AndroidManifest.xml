@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".RefreshTimerService"/>
+        <service android:name=".RefreshTimerService" />
     </application>
 
 </manifest>
