@@ -27,6 +27,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+// TODO remove drawer for settings menu
+// TODO repeat failed new wallpaper attempts
+
 public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
