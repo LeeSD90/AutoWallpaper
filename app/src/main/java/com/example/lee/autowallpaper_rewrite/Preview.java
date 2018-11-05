@@ -144,7 +144,6 @@ public class Preview extends AppCompatActivity
 
     private void setTimer(int interval) {
         Intent i = new Intent(this, RefreshTimerService.class);
-        i.putExtra("interval", interval);
         this.startService(i);
     }
 

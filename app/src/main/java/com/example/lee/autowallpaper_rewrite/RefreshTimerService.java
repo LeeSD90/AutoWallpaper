@@ -24,10 +24,9 @@ public class RefreshTimerService extends Service {
     public int onStartCommand (Intent intent, int flags, int startId) {
         timer.cancel();
         timer = new Timer();
-        interval = (int) intent.getExtras().get("interval");
 
-        // TODO use preferences saved interval
-        //PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.search_key), getString(R.string.default_search))
+        String intervalString = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.interval_key), getString(R.string.default_interval));
+        interval = Integer.parseInt(intervalString);
 
         // TODO move this check?
         if (interval != 0) {
