@@ -23,7 +23,9 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".RefreshTimerService" />
+        <service android:name=".RefreshTimerService"
+                 android:exported="false"
+                 android:process=":RefreshTimerServiceProcess"/>
     </application>
 
 </manifest>
