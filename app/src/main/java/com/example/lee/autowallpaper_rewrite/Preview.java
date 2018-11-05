@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,7 +40,6 @@ public class Preview extends AppCompatActivity
 
     SharedPreferences sharedPreferences;
     public static final String preferences = "AppPreferences";
-    public static final String Search = "searchKey";
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -55,7 +55,7 @@ public class Preview extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        sharedPreferences = getSharedPreferences(preferences, Context.MODE_PRIVATE);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,7 +75,10 @@ public class Preview extends AppCompatActivity
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                int interval = Integer.parseInt(getResources().getStringArray(R.array.interval_array_values)[i]);
+                String selected = getResources().getStringArray(R.array.interval_array_values)[i];
+                setStoredInterval(selected);
+
+                int interval = Integer.parseInt(getInterval());
                 setTimer(interval);
             }
 
@@ -84,6 +87,11 @@ public class Preview extends AppCompatActivity
 
             }
         });
+
+        String compare = getInterval();
+        if(compare != null) {
+            spinner.setSelection(adapter.getPosition(compare));
+        }
 
         // Set up the wallpaper preview
         updatePreview();
@@ -101,26 +109,15 @@ public class Preview extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_preview_drawer, menu);
-        return true;
-    }
+    public void onPause() {
+        super.onPause();
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        registerReceiver(broadcastReceiver, new IntentFilter(RefreshTimerService.UPDATE_WALL));
-    }
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+
+        Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.menu_interval).getActionView();
+        setStoredInterval(spinner.getSelectedItem().toString());
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -191,11 +188,25 @@ public class Preview extends AppCompatActivity
         builder.show();
     }
 
+    private void setStoredInterval(String interval){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(getString(R.string.interval_key), interval);
+        editor.commit();
+    }
+
+    private String getInterval(){
+        return sharedPreferences.getString(getString(R.string.interval_key), getString(R.string.default_interval));
+    }
+
     private void setSearchString(String text){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(Search, text);
+        editor.putString(getString(R.string.search_key), text);
         editor.commit();
         updateSettings();
+    }
+
+    private String getSearchString(){
+        return sharedPreferences.getString(getString(R.string.search_key), getString(R.string.default_search));
     }
 
     private void updateSettings() {
@@ -203,17 +214,11 @@ public class Preview extends AppCompatActivity
         Menu menu = navigationView.getMenu();
         MenuItem item = menu.findItem(R.id.menu_search);
         View subView = item.getActionView();
-        TextView searchString = subView.findViewById(R.id.searchStringView);
-        searchString.setText(sharedPreferences.getString(Search, "puppies"));
-    }
 
-    private String getSearchString(){
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        Menu menu = navigationView.getMenu();
-        MenuItem item = menu.findItem(R.id.menu_search);
-        View subView = item.getActionView();
         TextView searchString = subView.findViewById(R.id.searchStringView);
-        return searchString.getText().toString();
+        searchString.setText(getSearchString());
+
+
     }
 
     // Set up the wallpaper preview
@@ -222,5 +227,28 @@ public class Preview extends AppCompatActivity
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
         Drawable wallpaper = wallpaperManager.getDrawable();
         wallpaperPreviewArea.setImageDrawable(wallpaper);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_preview_drawer, menu);
+        return true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(broadcastReceiver, new IntentFilter(RefreshTimerService.UPDATE_WALL));
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }
