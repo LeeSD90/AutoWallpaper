@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.util.Timer;
@@ -24,6 +25,9 @@ public class RefreshTimerService extends Service {
         timer.cancel();
         timer = new Timer();
         interval = (int) intent.getExtras().get("interval");
+
+        // TODO use preferences saved interval
+        //PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.search_key), getString(R.string.default_search))
 
         // TODO move this check?
         if (interval != 0) {
@@ -65,7 +69,8 @@ public class RefreshTimerService extends Service {
                 @Override
                 public void run() {
                     Log.d("Timer", "Running schedule now... " + Integer.toString(interval));
-                    WallpaperSetter.setNewWallpaper(getApplicationContext(), "placeholder");
+                    Log.d("Timer", PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.search_key), getString(R.string.default_search)));
+                    WallpaperSetter.setNewWallpaper(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.search_key), getString(R.string.default_search)));
                     update();
                 }
             });
