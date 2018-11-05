@@ -89,6 +89,7 @@ public class Preview extends AppCompatActivity
         });
 
         String compare = getInterval();
+        adapter = ArrayAdapter.createFromResource(this, R.array.interval_array_values, android.R.layout.simple_spinner_item);
         if(compare != null) {
             spinner.setSelection(adapter.getPosition(compare));
         }
@@ -108,17 +109,7 @@ public class Preview extends AppCompatActivity
         });
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        Spinner spinner = (Spinner) navigationView.getMenu().findItem(R.id.menu_interval).getActionView();
-        setStoredInterval(spinner.getSelectedItem().toString());
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
