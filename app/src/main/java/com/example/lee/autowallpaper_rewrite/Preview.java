@@ -39,7 +39,6 @@ public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SharedPreferences sharedPreferences;
-    public static final String preferences = "AppPreferences";
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
