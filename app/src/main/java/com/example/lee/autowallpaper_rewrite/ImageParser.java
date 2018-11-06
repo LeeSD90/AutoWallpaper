@@ -61,7 +61,6 @@ public final class ImageParser {
         try {
 
             doc = Jsoup.connect(searchURL).userAgent(userAgent).referrer(GOOGLE).get();
-            Log.d(TAG, doc.toString());
             Elements elements = doc.select("div.rg_meta");
 
             JSONObject jsonObject;
@@ -73,14 +72,9 @@ public final class ImageParser {
             }
 
             System.out.println("number of results: " + resultUrls.size());
-            Log.d(TAG, resultUrls.get(0));
             Random r = new Random();
             int seed = r.nextInt((resultUrls.size() - 1) + 1) + 1;          // Generate random number for wallpaper to pick
             imageURL = resultUrls.get(seed);
-
-            for (String imageUrl : resultUrls) {
-                System.out.println(imageUrl);
-            }
 
             Log.d(TAG, "Selected URL " + seed + " - " + imageURL);
 
