@@ -30,9 +30,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-// TODO remove drawer for settings menu?
 // TODO repeat failed new wallpaper attempts
-// TODO investigate crashing on app close
 // TODO implement the rest of sharedPrefs
 
 public class Preview extends AppCompatActivity
@@ -77,8 +75,7 @@ public class Preview extends AppCompatActivity
                 String selected = getResources().getStringArray(R.array.interval_array_values)[i];
                 setStoredInterval(selected);
 
-                int interval = Integer.parseInt(getInterval());
-                setTimer(interval);
+                updateTimer();
             }
 
             @Override
@@ -142,8 +139,10 @@ public class Preview extends AppCompatActivity
         }
     }
 
-    private void setTimer(int interval) {
+    private void updateTimer() {
         Intent i = new Intent(this, RefreshTimerService.class);
+        i.putExtra("Interval", getInterval());
+        i.putExtra("Search", getSearchString());
         this.startService(i);
     }
 
