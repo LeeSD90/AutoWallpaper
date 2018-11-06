@@ -163,6 +163,7 @@ public class Preview extends AppCompatActivity
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Set the text
                 setSearchString(input.getText().toString());
+                updateTimer();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
