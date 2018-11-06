@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.util.Timer;
@@ -29,7 +28,6 @@ public class RefreshTimerService extends Service {
         interval = Integer.parseInt(intent.getStringExtra("Interval"));
         search = intent.getStringExtra("Search");
 
-        Log.d("TEST", Boolean.toString(interval != 0));
         // TODO move this check?
         if (interval != 0) {
             timer.scheduleAtFixedRate(new refreshTimer(), 0, interval);
