@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 public class RefreshTimerService extends Service {
     private int interval;
+    private String search;
 
     private Handler handler = new Handler();
 
@@ -25,9 +26,10 @@ public class RefreshTimerService extends Service {
         timer.cancel();
         timer = new Timer();
 
-        String intervalString = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.interval_key), getString(R.string.default_interval));
-        interval = Integer.parseInt(intervalString);
+        interval = Integer.parseInt(intent.getStringExtra("Interval"));
+        search = intent.getStringExtra("Search");
 
+        Log.d("TEST", Boolean.toString(interval != 0));
         // TODO move this check?
         if (interval != 0) {
             timer.scheduleAtFixedRate(new refreshTimer(), 0, interval);
@@ -68,8 +70,8 @@ public class RefreshTimerService extends Service {
                 @Override
                 public void run() {
                     Log.d("Timer", "Running schedule now... " + Integer.toString(interval));
-                    Log.d("Timer", PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.search_key), getString(R.string.default_search)));
-                    WallpaperSetter.setNewWallpaper(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(getString(R.string.search_key), getString(R.string.default_search)));
+                    Log.d("Timer", "Using Term - " + search);
+                    WallpaperSetter.setNewWallpaper(getApplicationContext(), search);
                     update();
                 }
             });
