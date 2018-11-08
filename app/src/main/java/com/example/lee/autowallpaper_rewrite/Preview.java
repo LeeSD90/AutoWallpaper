@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 // TODO repeat failed new wallpaper attempts
 // TODO implement the rest of sharedPrefs
+// TODO additional mobile friendly parameters
 
 public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
