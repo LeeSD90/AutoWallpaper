@@ -53,9 +53,7 @@ public class RefreshTimerService extends Service {
     }
 
     @Override
-    public void onDestroy() {
-        stopService(intent);
-    }
+    public void onDestroy() { stopService(intent); }
 
     private void update() {
         sendBroadcast(intent);
