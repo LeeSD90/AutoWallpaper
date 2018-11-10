@@ -207,8 +207,6 @@ public class Preview extends AppCompatActivity
 
         TextView searchString = subView.findViewById(R.id.searchStringView);
         searchString.setText(getSearchString());
-
-
     }
 
     // Set up the wallpaper preview
