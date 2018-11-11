@@ -73,7 +73,7 @@ public final class ImageParser {
 
             System.out.println("number of results: " + resultUrls.size());
             Random r = new Random();
-            int seed = r.nextInt((resultUrls.size() - 1) + 1) + 1;          // Generate random number for wallpaper to pick
+            int seed = r.nextInt((resultUrls.size() - 1) + 1);          // Generate random number for wallpaper to pick
             imageURL = resultUrls.get(seed);
 
             Log.d(TAG, "Selected URL " + seed + " - " + imageURL);
