@@ -9,7 +9,6 @@ public class WallpaperSetter {
 
     }
 
-    // TODO Own thread?
     // Get a new wallpaper with the given settings
     public static Boolean setNewWallpaper(Context c, String search) {
         try{
