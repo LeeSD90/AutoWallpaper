@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 // TODO repeat failed new wallpaper attempts
 // TODO implement the rest of sharedPrefs
 // TODO additional mobile friendly parameters
@@ -192,6 +194,13 @@ public class Preview extends AppCompatActivity
         editor.putString(getString(R.string.search_key), text);
         editor.commit();
         updateSettings();
+    }
+
+    private HashMap<String, String> getSettings(){
+        HashMap<String, String> settings = new HashMap<String, String>();
+        settings.put("Search", getSearchString());
+        settings.put("Interval", getInterval());
+        return settings;
     }
 
     private String getSearchString(){
