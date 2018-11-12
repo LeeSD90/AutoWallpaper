@@ -10,7 +10,8 @@ public class WallpaperSetter {
     private WallpaperSetter(){
 
     }
-
+    // TODO Implement custom settings
+    // TODO Include ability to base aspect ratio and size on device resolution/dimensions?
     // Get a new wallpaper with the given settings
     public static Boolean setNewWallpaper(Context c, HashMap<String, String> settings) {
         try{
