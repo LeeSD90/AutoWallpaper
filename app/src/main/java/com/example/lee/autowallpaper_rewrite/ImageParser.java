@@ -38,7 +38,6 @@ public final class ImageParser {
                     imageURL = selectImage(searchURL);                    // Get the hyperlink of a randomly selected wallpaper from the page
                     image = (getBitmapFromURL(imageURL));           // Download the image to a bitmap
                 } catch(Exception e){
-                    Log.d(TAG, "Something bad happened");
                     e.printStackTrace();
                 }
             }
@@ -79,6 +78,7 @@ public final class ImageParser {
             Log.d(TAG, "Selected URL " + seed + " - " + imageURL);
 
         } catch (Exception e) {
+            Log.d(TAG, "Error parsing an image URL from the provided search URL");
             e.printStackTrace();
         }
         return imageURL;
@@ -93,7 +93,7 @@ public final class ImageParser {
         }
         catch(Exception e){
             e.printStackTrace();
-            Log.d(TAG, "Unable to obtain bitmap, no internet?");
+            Log.d(TAG, "Unable to obtain bitmap from the given url");
             return null;
         }
         return image;
