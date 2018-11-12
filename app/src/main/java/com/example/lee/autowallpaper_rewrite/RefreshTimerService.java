@@ -6,12 +6,14 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class RefreshTimerService extends Service {
     private int interval;
     private String search;
+    private HashMap<String, String> settings;
 
     private Handler handler = new Handler();
 
@@ -25,8 +27,10 @@ public class RefreshTimerService extends Service {
         timer.cancel();
         timer = new Timer();
 
-        interval = Integer.parseInt(intent.getStringExtra("Interval"));
-        search = intent.getStringExtra("Search");
+        settings = (HashMap) intent.getSerializableExtra("Settings");
+
+        interval = Integer.parseInt(settings.get("Interval"));
+        search = settings.get("Search");
 
         // TODO move this check?
         if (interval != 0) {
@@ -67,7 +71,7 @@ public class RefreshTimerService extends Service {
                 public void run() {
                     Log.d("Timer", "Running schedule now... " + Integer.toString(interval));
                     Log.d("Timer", "Using Term - " + search);
-                    WallpaperSetter.setNewWallpaper(getApplicationContext(), search);
+                    WallpaperSetter.setNewWallpaper(getApplicationContext(), settings);
                     update();
                 }
             });

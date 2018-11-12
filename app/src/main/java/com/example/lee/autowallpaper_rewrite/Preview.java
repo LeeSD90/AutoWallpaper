@@ -136,19 +136,16 @@ public class Preview extends AppCompatActivity
     }
 
     private void updateWallpaper(){
-        if(WallpaperSetter.setNewWallpaper(getApplicationContext(), getSearchString())){
+        if(WallpaperSetter.setNewWallpaper(getApplicationContext(), getSettings())){
             updatePreview();
         }
     }
 
     private void updateTimer() {
         Intent i = new Intent(this, RefreshTimerService.class);
-        i.putExtra("Interval", getInterval());
-        i.putExtra("Search", getSearchString());
+        i.putExtra("Settings", getSettings());
         this.startService(i);
     }
-
-
 
     // Provide dialog for user to set the search string
     private void inputSearchString(){
