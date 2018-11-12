@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -163,7 +162,7 @@ public class Preview extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Set the text
-                setSearchString(input.getText().toString());
+                setStoredSearchString(input.getText().toString());
                 updateTimer();
             }
         });
@@ -188,7 +187,7 @@ public class Preview extends AppCompatActivity
         return sharedPreferences.getString(getString(R.string.interval_key), getString(R.string.default_interval));
     }
 
-    private void setSearchString(String text){
+    private void setStoredSearchString(String text){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.search_key), text);
         editor.commit();
