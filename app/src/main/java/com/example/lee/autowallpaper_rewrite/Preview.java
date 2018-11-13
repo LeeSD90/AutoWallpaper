@@ -34,6 +34,7 @@ import java.util.HashMap;
 // TODO repeat failed new wallpaper attempts
 // TODO implement the rest of sharedPrefs
 // TODO additional mobile friendly parameters
+// TODO Refactor function names
 
 public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +44,7 @@ public class Preview extends AppCompatActivity
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updatePreview();
+            updateWallpaperPreview();
         }
     };
 
@@ -77,7 +78,7 @@ public class Preview extends AppCompatActivity
                 String selected = getResources().getStringArray(R.array.interval_array_values)[i];
                 setStoredInterval(selected);
 
-                updateTimer();
+                setNewRefreshTimer();
             }
 
             @Override
@@ -93,16 +94,16 @@ public class Preview extends AppCompatActivity
         }
 
         // Set up the wallpaper preview
-        updatePreview();
+        updateWallpaperPreview();
 
         // Get Settings from sharedprefs
-        updateSettings();
+        refreshInterfaceSettings();
 
         // New Wallpaper interface button
         Button newWallpaper = findViewById(R.id.newWallpaper);
         newWallpaper.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                updateWallpaper();
+                getNewWallpaper();
             }
         });
     }
@@ -117,12 +118,12 @@ public class Preview extends AppCompatActivity
 
         switch(id){
             case R.id.menu_new_wall:
-                updateWallpaper();
+                getNewWallpaper();
                 break;
             case R.id.menu_save_wall:
                 break;
             case R.id.menu_search:
-                inputSearchString();
+                openSearchStringInput();
                 break;
             case R.id.menu_wifi:
                 break;
@@ -135,20 +136,20 @@ public class Preview extends AppCompatActivity
         return true;
     }
 
-    private void updateWallpaper(){
+    private void getNewWallpaper(){
         if(WallpaperSetter.setNewWallpaper(getApplicationContext(), getSettings())){
-            updatePreview();
+            updateWallpaperPreview();
         }
     }
 
-    private void updateTimer() {
+    private void setNewRefreshTimer() {
         Intent i = new Intent(this, RefreshTimerService.class);
         i.putExtra("Settings", getSettings());
         this.startService(i);
     }
 
     // Provide dialog for user to set the search string
-    private void inputSearchString(){
+    private void openSearchStringInput(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Search Term");
 
@@ -162,7 +163,7 @@ public class Preview extends AppCompatActivity
             public void onClick(DialogInterface dialogInterface, int i) {
                 // Set the text
                 setStoredSearchString(input.getText().toString());
-                updateTimer();
+                setNewRefreshTimer();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -190,7 +191,11 @@ public class Preview extends AppCompatActivity
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.search_key), text);
         editor.commit();
-        updateSettings();
+        refreshInterfaceSettings();
+    }
+
+    private String getSearchString(){
+        return sharedPreferences.getString(getString(R.string.search_key), getString(R.string.default_search));
     }
 
     private HashMap<String, String> getSettings(){
@@ -200,11 +205,7 @@ public class Preview extends AppCompatActivity
         return settings;
     }
 
-    private String getSearchString(){
-        return sharedPreferences.getString(getString(R.string.search_key), getString(R.string.default_search));
-    }
-
-    private void updateSettings() {
+    private void refreshInterfaceSettings() {
         NavigationView navigationView = findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         MenuItem item = menu.findItem(R.id.menu_search);
@@ -214,8 +215,8 @@ public class Preview extends AppCompatActivity
         searchString.setText(getSearchString());
     }
 
-    // Set up the wallpaper preview
-    private void updatePreview() {
+    // Update wallpaper preview box
+    private void updateWallpaperPreview() {
         ImageView wallpaperPreviewArea = findViewById(R.id.previewImageView);
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
         Drawable wallpaper = wallpaperManager.getDrawable();
