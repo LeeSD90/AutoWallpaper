@@ -1,5 +1,6 @@
 package com.example.lee.autowallpaper_rewrite;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
 import android.content.BroadcastReceiver;
@@ -8,9 +9,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
@@ -37,14 +41,16 @@ import java.util.HashMap;
 // TODO Refactor function names
 
 public class Preview extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
+
+    private static final int REQUEST_READ_EXTERNAL_STORAGE = 999;
 
     SharedPreferences sharedPreferences;
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateWallpaperPreview();
+            checkPermissionAndUpdateWallpaperPreview();
         }
     };
 
@@ -94,7 +100,8 @@ public class Preview extends AppCompatActivity
         }
 
         // Set up the wallpaper preview
-        updateWallpaperPreview();
+        checkPermissionAndUpdateWallpaperPreview();
+
 
         // Get Settings from sharedprefs
         refreshInterfaceSettings();
@@ -138,7 +145,7 @@ public class Preview extends AppCompatActivity
 
     private void getNewWallpaper(){
         if(WallpaperSetter.setNewWallpaper(getApplicationContext(), getSettings())){
-            updateWallpaperPreview();
+            checkPermissionAndUpdateWallpaperPreview();
         }
     }
 
@@ -215,12 +222,49 @@ public class Preview extends AppCompatActivity
         searchString.setText(getSearchString());
     }
 
+    private void checkPermissionAndUpdateWallpaperPreview() {
+        if(Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Should we show an explanation?
+                if (shouldShowRequestPermissionRationale(
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    // Explain to the user why we need to read the contacts
+                }
+
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_READ_EXTERNAL_STORAGE);
+
+                return;
+            } else {
+                updateWallpaperPreview();
+            }
+        } else {
+            updateWallpaperPreview();
+        }
+    }
+
     // Update wallpaper preview box
     private void updateWallpaperPreview() {
         ImageView wallpaperPreviewArea = findViewById(R.id.previewImageView);
         WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
         Drawable wallpaper = wallpaperManager.getDrawable();
         wallpaperPreviewArea.setImageDrawable(wallpaper);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_READ_EXTERNAL_STORAGE:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    updateWallpaperPreview();
+                }
+                break;
+
+            default:
+                break;
+        }
     }
 
     @Override
