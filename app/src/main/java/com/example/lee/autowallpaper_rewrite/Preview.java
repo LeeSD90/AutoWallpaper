@@ -39,6 +39,7 @@ import java.util.HashMap;
 // TODO implement the rest of sharedPrefs
 // TODO additional mobile friendly parameters
 // TODO Refactor function names
+// TODO Add info box explaining permission requirement
 
 public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
