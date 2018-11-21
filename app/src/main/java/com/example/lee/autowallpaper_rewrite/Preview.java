@@ -1,7 +1,9 @@
 package com.example.lee.autowallpaper_rewrite;
 
 import android.Manifest;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.WallpaperManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -45,6 +47,7 @@ public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int REQUEST_READ_EXTERNAL_STORAGE = 999;
+    private static Boolean DEBUG = true;
 
     SharedPreferences sharedPreferences;
 
@@ -151,11 +154,22 @@ public class Preview extends AppCompatActivity
     }
 
     private void setNewRefreshTimer() {
+        Intent aI = new Intent(this, RefreshReceiver.class);
+        aI.putExtra("Settings", getSettings());
+        if(DEBUG) { aI.putExtra("DEBUG", true); }
+        PendingIntent pI = PendingIntent.getBroadcast(this, 0, aI, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager aM = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        if(DEBUG) { aM.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pI);}
+        else { aM.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(), Long.parseLong(getInterval()), pI); }
+
+    }
+/*
+    private void setNewRefreshTimer() {
         Intent i = new Intent(this, RefreshTimerService.class);
         i.putExtra("Settings", getSettings());
         this.startService(i);
     }
-
+*/
     // Provide dialog for user to set the search string
     private void openSearchStringInput(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
