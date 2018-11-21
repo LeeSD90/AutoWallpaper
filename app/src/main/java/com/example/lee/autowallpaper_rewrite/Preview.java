@@ -42,6 +42,7 @@ import java.util.HashMap;
 // TODO additional mobile friendly parameters
 // TODO Refactor function names
 // TODO Add info box explaining permission requirement
+// TODO forget to close response body error
 
 public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -293,7 +294,7 @@ public class Preview extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
-        registerReceiver(broadcastReceiver, new IntentFilter(RefreshTimerService.UPDATE_WALL));
+        registerReceiver(broadcastReceiver, new IntentFilter(RefreshReceiver.UPDATE_PREVIEW));
     }
 
     @Override
