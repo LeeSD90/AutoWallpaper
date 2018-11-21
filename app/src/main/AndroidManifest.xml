@@ -24,11 +24,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".RefreshTimerService"
-            android:exported="false"
-            android:process=":RefreshTimerServiceProcess" />
-
         <receiver
             android:name=".RefreshReceiver"
             android:enabled="true"

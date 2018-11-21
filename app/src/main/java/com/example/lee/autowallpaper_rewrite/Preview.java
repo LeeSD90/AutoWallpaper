@@ -172,13 +172,7 @@ public class Preview extends AppCompatActivity
         else { aM.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(), Long.parseLong(getInterval()), pI); }
 
     }
-/*
-    private void setNewRefreshTimer() {
-        Intent i = new Intent(this, RefreshTimerService.class);
-        i.putExtra("Settings", getSettings());
-        this.startService(i);
-    }
-*/
+
     // Provide dialog for user to set the search string
     private void openSearchStringInput(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
