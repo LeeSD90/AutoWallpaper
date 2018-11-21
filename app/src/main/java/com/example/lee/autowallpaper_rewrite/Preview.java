@@ -153,6 +153,14 @@ public class Preview extends AppCompatActivity
         }
     }
 
+    private  void cancelRefreshTimer() {
+        Intent aI = new Intent(this, RefreshReceiver.class);
+        aI.putExtra("Settings", getSettings());
+        PendingIntent pI = PendingIntent.getBroadcast(this, 0, aI, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager aM = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        aM.cancel(pI);
+    }
+
     private void setNewRefreshTimer() {
         Intent aI = new Intent(this, RefreshReceiver.class);
         aI.putExtra("Settings", getSettings());
