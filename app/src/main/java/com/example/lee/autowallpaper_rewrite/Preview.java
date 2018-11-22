@@ -248,7 +248,7 @@ public class Preview extends AppCompatActivity
                 // Should we show an explanation?
                 if (shouldShowRequestPermissionRationale(
                         Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    // Explain to the user why we need to read the contacts
+                    // TODO Explain to the user why we need to read the contacts
                 }
 
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
