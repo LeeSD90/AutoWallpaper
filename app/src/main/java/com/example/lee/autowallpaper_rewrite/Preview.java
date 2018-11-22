@@ -224,7 +224,7 @@ public class Preview extends AppCompatActivity
     }
 
     private HashMap<String, String> getSettings(){
-        HashMap<String, String> settings = new HashMap<String, String>();
+        HashMap<String, String> settings = new HashMap<>();
         settings.put("Search", getSearchString());
         settings.put("Interval", getInterval());
         return settings;
