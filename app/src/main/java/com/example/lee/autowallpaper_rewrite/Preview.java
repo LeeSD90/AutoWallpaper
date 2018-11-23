@@ -43,6 +43,7 @@ import java.util.HashMap;
 // TODO Refactor function names
 // TODO Add info box explaining permission requirement
 // TODO forget to close response body error
+// TODO Add start on boot
 
 public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
