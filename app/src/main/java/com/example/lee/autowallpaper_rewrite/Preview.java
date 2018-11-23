@@ -205,7 +205,7 @@ public class Preview extends AppCompatActivity
     private void setStoredInterval(String interval){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.interval_key), interval);
-        editor.commit();
+        editor.apply();
     }
 
     private String getInterval(){
@@ -215,7 +215,7 @@ public class Preview extends AppCompatActivity
     private void setStoredSearchString(String text){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.search_key), text);
-        editor.commit();
+        editor.apply();
         refreshInterfaceSettings();
     }
 
