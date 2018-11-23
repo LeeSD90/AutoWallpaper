@@ -48,7 +48,7 @@ public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int REQUEST_READ_EXTERNAL_STORAGE = 999;
-    private static Boolean DEBUG = true;
+    private static Boolean DEBUG = false;
 
     SharedPreferences sharedPreferences;
 
