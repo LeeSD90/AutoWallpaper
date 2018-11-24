@@ -50,7 +50,7 @@ public class Preview extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int REQUEST_READ_EXTERNAL_STORAGE = 999;
-    private static Boolean DEBUG = false;
+    public static final Boolean DEBUG = false;
 
     SharedPreferences sharedPreferences;
 
@@ -167,7 +167,6 @@ public class Preview extends AppCompatActivity
     private void setNewRefreshTimer() {
         Intent aI = new Intent(this, RefreshReceiver.class);
         aI.putExtra("Settings", getSettings());
-        if(DEBUG) { aI.putExtra("DEBUG", true); }
         PendingIntent pI = PendingIntent.getBroadcast(this, 0, aI, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager aM = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);

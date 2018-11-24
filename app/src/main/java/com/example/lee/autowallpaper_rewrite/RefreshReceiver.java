@@ -19,10 +19,10 @@ public class RefreshReceiver extends BroadcastReceiver {
 
         if(settings.get("Interval") == "0") { return; }
 
-        if(intent.getBooleanExtra("DEBUG", false)){
+        // If Debugging reset alarm for 10 sec
+        if(Preview.DEBUG){
            Intent aI = new Intent(context, RefreshReceiver.class);
            aI.putExtra("Settings", settings);
-           aI.putExtra("DEBUG", true);
            PendingIntent pI = PendingIntent.getBroadcast(context, 0, aI, PendingIntent.FLAG_UPDATE_CURRENT);
            AlarmManager aM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
            aM.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pI);
