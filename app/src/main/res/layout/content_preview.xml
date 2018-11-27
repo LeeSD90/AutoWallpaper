@@ -36,7 +36,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="Current Wallpaper"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/previewImageView"
         app:layout_constraintEnd_toEndOf="parent"
