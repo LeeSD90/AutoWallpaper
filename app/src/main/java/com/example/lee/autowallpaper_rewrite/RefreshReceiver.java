@@ -19,7 +19,7 @@ public class RefreshReceiver extends BroadcastReceiver {
 
         if(settings.get("Interval") == "0") { return; }
 
-        // If Debugging reset alarm for 10 sec
+        // If Debugging reset alarm to trigger again in 10 seconds
         if(Preview.DEBUG){
            Intent aI = new Intent(context, RefreshReceiver.class);
            aI.putExtra("Settings", settings);
