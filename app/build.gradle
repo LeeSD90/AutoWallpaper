@@ -29,6 +29,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'org.jsoup:jsoup:1.8.3' //Jsoup
+    implementation 'org.jsoup:jsoup:1.8.3'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 }
