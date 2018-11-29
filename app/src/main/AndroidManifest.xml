@@ -28,7 +28,7 @@
             android:name=".RefreshReceiver"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"></receiver>
+            android:process=":remote" />
     </application>
 
 </manifest>
