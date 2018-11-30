@@ -255,7 +255,6 @@ public class Preview extends AppCompatActivity
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_READ_EXTERNAL_STORAGE);
 
-                return;
             } else {
                 updateWallpaperPreview();
             }
