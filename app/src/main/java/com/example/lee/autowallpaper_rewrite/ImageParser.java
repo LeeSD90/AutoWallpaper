@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public final class ImageParser {
+final class ImageParser {
 
     private static final String TAG = "ImageParser";
     private static final String GOOGLE = "https://www.google.com";
