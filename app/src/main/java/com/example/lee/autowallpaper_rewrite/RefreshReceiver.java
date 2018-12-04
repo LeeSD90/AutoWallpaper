@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class RefreshReceiver extends BroadcastReceiver {
 
@@ -17,7 +18,7 @@ public class RefreshReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         HashMap<String, String> settings = (HashMap) intent.getSerializableExtra("Settings");
 
-        if(settings.get("Interval") == "0") { return; }
+        if(settings.get("Interval").equals("0")) { return; }
 
         // If Debugging reset alarm to trigger again in 10 seconds
         if(Preview.DEBUG){
