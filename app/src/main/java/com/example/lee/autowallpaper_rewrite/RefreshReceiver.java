@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class RefreshReceiver extends BroadcastReceiver {
 
