@@ -54,7 +54,7 @@ public class Preview extends AppCompatActivity
 
     SharedPreferences sharedPreferences;
 
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             checkPermissionAndUpdateWallpaperPreview();
