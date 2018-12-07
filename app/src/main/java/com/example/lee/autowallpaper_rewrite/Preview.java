@@ -52,7 +52,7 @@ public class Preview extends AppCompatActivity
     private static final int REQUEST_READ_EXTERNAL_STORAGE = 999;
     public static final Boolean DEBUG = false;
 
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
