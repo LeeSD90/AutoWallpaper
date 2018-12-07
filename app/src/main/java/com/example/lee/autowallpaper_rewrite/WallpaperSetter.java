@@ -5,7 +5,7 @@ import android.content.Context;
 
 import java.util.HashMap;
 
-public class WallpaperSetter {
+class WallpaperSetter {
 
     private WallpaperSetter(){
 
