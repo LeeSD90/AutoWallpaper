@@ -25,7 +25,13 @@ public class RefreshReceiver extends BroadcastReceiver {
            aI.putExtra("Settings", settings);
            PendingIntent pI = PendingIntent.getBroadcast(context, 0, aI, PendingIntent.FLAG_UPDATE_CURRENT);
            AlarmManager aM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-           aM.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pI);
+           try{
+               aM.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pI);
+           }
+           catch(Exception NullPointerException){
+               Log.d("RefreshReceiver", "Unable to set new Alarm");
+           }
+
         }
 
         Log.d("Timer", "Running schedule now... " + settings.get("Interval"));
