@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public class RefreshReceiver extends BroadcastReceiver {
 
+    private static final String TAG = "RefreshReceiver";
     public static final String UPDATE_PREVIEW = "com.example.lee.autowallpaper_rewrite";
 
     @Override
@@ -29,7 +30,7 @@ public class RefreshReceiver extends BroadcastReceiver {
                aM.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pI);
            }
            catch(Exception NullPointerException){
-               Log.d("RefreshReceiver", "Unable to set new Alarm");
+               Log.d(TAG, "Unable to set new Alarm");
            }
 
         }

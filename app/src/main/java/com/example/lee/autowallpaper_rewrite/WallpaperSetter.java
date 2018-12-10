@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 class WallpaperSetter {
 
+    private static final String TAG = "WallpaperSetter";
+
     private WallpaperSetter(){
 
     }
