@@ -18,6 +18,8 @@
     <string name="menu_wifi">Wifi Only</string>
     <string name="menu_roaming">Roaming</string>
 
+    <string name="wall_preview">Wallpaper Preview</string>
+
     <string name="search_key">searchKey</string>
     <string name="default_search">Puppies</string>
     <string name="interval_key">intervalKey</string>
