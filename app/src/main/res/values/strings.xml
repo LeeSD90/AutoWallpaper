@@ -19,6 +19,7 @@
     <string name="menu_roaming">Roaming</string>
 
     <string name="wall_preview">Wallpaper Preview</string>
+    <string name="wall_current">Current Wallpaper</string>
 
     <string name="search_key">searchKey</string>
     <string name="default_search">Puppies</string>
