@@ -33,7 +33,6 @@ public class RefreshReceiver extends BroadcastReceiver {
            catch(Exception e){
                Log.d(TAG, "Unable to set new Alarm - Error: " + e.getLocalizedMessage());
            }
-
         }
 
         Log.d("Timer", "Running schedule now... " + settings.get("Interval"));
