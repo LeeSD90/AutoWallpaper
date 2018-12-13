@@ -27,8 +27,9 @@ public class RefreshReceiver extends BroadcastReceiver {
            PendingIntent pI = PendingIntent.getBroadcast(context, 0, aI, PendingIntent.FLAG_UPDATE_CURRENT);
            AlarmManager aM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
            try{
-               assert aM != null;
-               aM.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pI);
+               if(aM != null) {
+                   aM.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pI);
+               }
            }
            catch(Exception e){
                Log.d(TAG, "Unable to set new Alarm - Error: " + e.getLocalizedMessage());
