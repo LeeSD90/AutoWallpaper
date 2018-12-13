@@ -156,7 +156,7 @@ public class Preview extends AppCompatActivity
             checkPermissionAndUpdateWallpaperPreview();
         }
     }
-
+/*
     private void cancelRefreshTimer() {
         Intent aI = new Intent(this, RefreshReceiver.class);
         aI.putExtra("Settings", getSettings());
@@ -164,7 +164,7 @@ public class Preview extends AppCompatActivity
         AlarmManager aM = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         if(aM != null){ aM.cancel(pI); }
     }
-
+*/
     private void setNewRefreshTimer() {
         Intent aI = new Intent(this, RefreshReceiver.class);
         aI.putExtra("Settings", getSettings());
