@@ -162,7 +162,7 @@ public class Preview extends AppCompatActivity
         aI.putExtra("Settings", getSettings());
         PendingIntent pI = PendingIntent.getBroadcast(this, 0, aI, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager aM = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        aM.cancel(pI);
+        if(aM != null){ aM.cancel(pI); }
     }
 
     private void setNewRefreshTimer() {
@@ -171,8 +171,13 @@ public class Preview extends AppCompatActivity
         PendingIntent pI = PendingIntent.getBroadcast(this, 0, aI, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager aM = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        if(DEBUG) { aM.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pI);}
-        else { aM.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(), Long.parseLong(getInterval()), pI); }
+        if(aM != null) {
+            if (DEBUG) {
+                aM.set(AlarmManager.RTC, System.currentTimeMillis() + 10000, pI);
+            } else {
+                aM.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(), Long.parseLong(getInterval()), pI);
+            }
+        }
     }
 
     // Provide dialog for user to set the search string
